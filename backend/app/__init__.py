@@ -1,0 +1,1 @@
+"""SmartRecycleAI backend application package."""
