@@ -1,12 +1,16 @@
 import { motion } from "framer-motion";
 import { Camera, CheckCircle2, UploadCloud } from "lucide-react";
-import SectionHeader from "../components/common/SectionHeader.jsx";
-import StatusBadge from "../components/common/StatusBadge.jsx";
+import Badge from "../components/ui/Badge.jsx";
+import PageHeader from "../components/ui/PageHeader.jsx";
 
 export default function RecognitionPage() {
   return (
     <div className="space-y-6">
-      <SectionHeader eyebrow="Vision IA" title="Reconocimiento de materiales" />
+      <PageHeader
+        eyebrow="Visión IA"
+        title="Reconocimiento de materiales"
+        description="Interfaz preparada para integrar carga de imagen, camaras industriales y respuestas normalizadas del motor de inteligencia artificial."
+      />
       <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -54,7 +58,7 @@ export default function RecognitionPage() {
                 Normalizacion, deteccion y salida estructurada.
               </p>
             </div>
-            <StatusBadge variant="online">Contrato v1</StatusBadge>
+            <Badge variant="mint">Contrato v1</Badge>
           </div>
           <div className="mt-6 grid gap-3">
             {[

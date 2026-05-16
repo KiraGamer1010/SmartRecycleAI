@@ -1,18 +1,22 @@
 import { motion } from "framer-motion";
 import { AlertTriangle, Database, Factory, ShieldCheck } from "lucide-react";
-import SectionHeader from "../components/common/SectionHeader.jsx";
-import StatusBadge from "../components/common/StatusBadge.jsx";
+import Badge from "../components/ui/Badge.jsx";
+import PageHeader from "../components/ui/PageHeader.jsx";
 
 const rows = [
   ["Linea norte", "PET", "96.8%", "Normal"],
   ["Linea sur", "Vidrio", "91.2%", "Normal"],
-  ["Linea oeste", "Mixto", "78.4%", "Revision"]
+  ["Línea oeste", "Mixto", "78.4%", "Revisión"]
 ];
 
 export default function OperationsPage() {
   return (
     <div className="space-y-6">
-      <SectionHeader eyebrow="Operaciones" title="Supervision de planta" />
+      <PageHeader
+        eyebrow="Operaciones"
+        title="Supervisión de planta"
+        description="Vista inicial para analizar líneas de clasificación, persistencia de datos y separación modular entre servicios."
+      />
       <section className="grid gap-6 lg:grid-cols-[1fr_320px]">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -23,10 +27,10 @@ export default function OperationsPage() {
             <div className="flex items-center gap-3">
               <Factory className="text-mint" size={22} aria-hidden="true" />
               <h2 className="text-lg font-semibold text-white">
-                Lineas de clasificacion
+                Líneas de clasificación
               </h2>
             </div>
-            <StatusBadge variant="online">Monitoreo</StatusBadge>
+            <Badge variant="mint">Monitoreo</Badge>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-white/10 text-left text-sm">
@@ -45,11 +49,9 @@ export default function OperationsPage() {
                     <td className="px-5 py-4">{material}</td>
                     <td className="px-5 py-4">{confidence}</td>
                     <td className="px-5 py-4">
-                      <StatusBadge
-                        variant={status === "Revision" ? "warning" : "online"}
-                      >
+                      <Badge variant={status === "Revisión" ? "solar" : "mint"}>
                         {status}
-                      </StatusBadge>
+                      </Badge>
                     </td>
                   </tr>
                 ))}

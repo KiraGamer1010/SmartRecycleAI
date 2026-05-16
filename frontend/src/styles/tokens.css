@@ -1,0 +1,14 @@
+:root {
+  --color-graphite: #07100f;
+  --color-panel: #0d1b19;
+  --color-panel-soft: #122421;
+  --color-mint: #52f2a8;
+  --color-algae: #0fbf84;
+  --color-signal: #38bdf8;
+  --color-solar: #f7c948;
+  --color-frost: #ecfdf5;
+  --radius-panel: 8px;
+  --shadow-premium: 0 24px 80px rgba(0, 0, 0, 0.28);
+  --layout-max-width: 1280px;
+  --nav-height: 72px;
+}
