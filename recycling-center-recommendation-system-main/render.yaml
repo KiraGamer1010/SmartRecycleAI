@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: smartrecycleai
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python createDataset/create_dataset.py
+    startCommand: gunicorn wsgi:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9

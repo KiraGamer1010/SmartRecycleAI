@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">CRISP-ML lifecycle</p>
+    <h1>Model Engineering</h1>
+    <p>
+        Model engineering defines how SmartRecycleAI would transform the prepared feature matrix into transparent,
+        reproducible, and auditable machine learning models for recycling center recommendation, sustainability
+        scoring, waste management analysis, and environmental decision support.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Engineering decisions</p>
+        <h2>From prepared features to candidate models</h2>
+        <p>
+            During model engineering, algorithms are selected according to the problem type, the available data,
+            the required level of interpretability, and the operational decisions that SmartRecycleAI must support.
+            The process must also consider domain expertise, reproducibility, transparency, and auditability.
+        </p>
+    </div>
+    <div class="grid two">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-brain"></i> Algorithm Selection</h3>
+            <p>
+                SmartRecycleAI can use interpretable classification models to predict recommendation priority,
+                ranking models to order municipalities by infrastructure need, and regression models to estimate
+                recycling potential or expected service gaps. Algorithm choice should balance predictive quality
+                with explainability for municipal and institutional stakeholders.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-dumbbell"></i> Training</h3>
+            <p>
+                Training applies the model-ready feature matrix to selected algorithms. Features such as collection
+                gap, recycling potential, hazardous waste pressure, facility capacity, poverty indicators, and
+                population growth become the input signals used to learn patterns associated with priority decisions.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Validation</h3>
+            <p>
+                Validation verifies whether the model performs on unseen municipalities rather than memorizing the
+                training records. A validation split or cross-validation strategy should preserve the distribution
+                of recommendation classes and verify that predictions remain coherent across different regions.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-sliders"></i> Hyperparameter Tuning</h3>
+            <p>
+                Hyperparameter tuning adjusts model configuration, such as tree depth, regularization strength,
+                learning rate, or class weighting. The goal is to improve generalization while avoiding overfitting,
+                unstable recommendations, or models that are too complex to explain.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <article class="text-panel">
+            <p class="eyebrow">Implemented model</p>
+            <h2>K-Means clustering is now executed by the pipeline</h2>
+            <p>
+                The application fits a real K-Means model using scaled municipal features for population pressure,
+                waste generation, recycling coverage, infrastructure capacity, social vulnerability, urban growth,
+                and environmental pressure.
+            </p>
+            <p>
+                The model exports cluster assignments, centroid profiles, an elbow method chart, and a strategic
+                need interpretation for recycling center planning.
+            </p>
+            <a class="button" href="{{ url_for('main.kmeans_clustering') }}"><i class="fa-solid fa-circle-nodes"></i>Open K-Means Analysis</a>
+        </article>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_clusters) }}" alt="K-Means clustering preview">
+            <figcaption>Municipality clusters generated from the real SmartRecycleAI feature matrix.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">SmartRecycleAI interpretation</p>
+        <h2>Recommended engineering workflow</h2>
+    </div>
+    <div class="pipeline-flow">
+        <article>
+            <span>01</span>
+            <h2>Define Target</h2>
+            <p>Use the encoded recommendation class or a sustainability score depending on the experiment.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h2>Select Features</h2>
+            <p>Use demand, accessibility, vulnerability, facility capacity, and environmental pressure variables.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h2>Train Model</h2>
+            <p>Fit candidate algorithms on the prepared feature matrix using reproducible random states.</p>
+        </article>
+        <article>
+            <span>04</span>
+            <h2>Validate</h2>
+            <p>Test on unseen data and compare predictive behavior against known planning logic.</p>
+        </article>
+        <article>
+            <span>05</span>
+            <h2>Tune</h2>
+            <p>Optimize model parameters without sacrificing interpretability or auditability.</p>
+        </article>
+        <article>
+            <span>06</span>
+            <h2>Document</h2>
+            <p>Record model assumptions, feature definitions, limitations, and intended operational use.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

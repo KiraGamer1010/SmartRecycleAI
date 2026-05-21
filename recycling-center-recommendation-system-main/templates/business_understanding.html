@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Phase 1</p>
+    <h1>Business Understanding</h1>
+    <p>
+        SmartRecycleAI addresses the need for evidence-based recycling infrastructure planning by identifying
+        municipalities where access gaps, waste potential, vulnerability, and infrastructure limitations justify
+        stronger intervention.
+    </p>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <article class="info-card">
+            <h2>Problem Context</h2>
+            <p>
+                Recycling systems often face uneven infrastructure distribution, incomplete local capacity,
+                limited collection coverage, and insufficient prioritization criteria. Municipalities with high
+                recyclable waste potential can remain underserved when planning relies only on administrative
+                availability rather than integrated data.
+            </p>
+        </article>
+        <article class="info-card">
+            <h2>Business Objective</h2>
+            <p>
+                Build a transparent analytical system that prepares data for recommending where recycling collection
+                centers should be strengthened or created, while supporting academic review of every data decision.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Decision questions</p>
+        <h2>Questions the model should answer</h2>
+    </div>
+    <div class="grid three">
+        <article class="info-card compact">
+            <h3>Where is intervention most urgent?</h3>
+            <p>Classify municipalities by recommendation priority using access, waste, and vulnerability features.</p>
+        </article>
+        <article class="info-card compact">
+            <h3>Where is infrastructure insufficient?</h3>
+            <p>Compare recycling potential with existing collection centers and registered facility capacity.</p>
+        </article>
+        <article class="info-card compact">
+            <h3>Which factors drive priority?</h3>
+            <p>Analyze correlations among poverty, collection coverage, distance, waste generation, and facility availability.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Feasibility</h2>
+            <p>
+                The project is feasible because the repository already contains municipal, census, recycling facility,
+                waste, and projection datasets. The implemented pipeline converts these sources into repeatable processed
+                artifacts, charts, and a model-ready feature matrix without requiring external services.
+            </p>
+            <p>
+                Flask is appropriate for local academic review and Render deployment because the data volume is small
+                enough for startup-time artifact generation and static chart delivery.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Risks and Limitations</h2>
+            <p>
+                The current target labels come from the existing modeling dataset, so future validation should compare
+                predictions against expert planning decisions. Some sources have different geographic granularity, and
+                the hazardous waste file does not include a department column. The pipeline documents these limitations
+                and prevents ambiguous joins where possible.
+            </p>
+            <p>
+                Recycling center recommendation should support decision makers, not replace field validation,
+                regulatory review, budget constraints, or community consultation.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Expected value</p>
+        <h2>Impact analysis</h2>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3>Environmental Impact</h3>
+            <p>Improves visibility into recyclable waste potential and hazardous waste pressure, supporting more sustainable material recovery planning.</p>
+        </article>
+        <article class="info-card">
+            <h3>Operational Impact</h3>
+            <p>Helps compare collection gaps with facility availability, allowing planners to focus on municipalities with measurable infrastructure needs.</p>
+        </article>
+        <article class="info-card">
+            <h3>Social Impact</h3>
+            <p>Incorporates vulnerability indicators so recommendations account for communities where service access and environmental burden matter most.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,476 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Real machine learning phase</p>
+    <h1>K-Means Clustering</h1>
+    <p>
+        SmartRecycleAI now runs an unsupervised K-Means model over the integrated municipal feature matrix to
+        discover groups with similar demand, recycling infrastructure, social vulnerability, urban growth, and
+        environmental pressure. The goal is to identify strategic zones for recycling center planning.
+    </p>
+</section>
+
+<section class="section">
+    <div class="stats-row">
+        <article>
+            <span>{{ kmeans_analysis.records_used|number }}</span>
+            <p>Municipal records clustered</p>
+        </article>
+        <article>
+            <span>{{ kmeans_analysis.features_used_count }}</span>
+            <p>Numerical features selected</p>
+        </article>
+        <article>
+            <span>{{ kmeans_analysis.selected_k }}</span>
+            <p>Selected K value</p>
+        </article>
+        <article>
+            <span>{{ kmeans_analysis.k_range_tested }}</span>
+            <p>Elbow method range</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Model justification</p>
+        <h2>Why K-Means fits SmartRecycleAI</h2>
+        <p>
+            SmartRecycleAI uses unsupervised learning because the platform does not have a verified historical
+            ground-truth label for every possible recycling center investment decision. K-Means is appropriate here
+            because it groups municipalities by similarity across standardized planning indicators, producing
+            interpretable profiles for sustainability analysis and public policy discussion.
+        </p>
+    </div>
+    <div class="grid four">
+        <article class="info-card compact">
+            <h3><i class="fa-solid fa-tags"></i>No Complete Labels</h3>
+            <p>Municipal investment priority is a planning decision, not a fully observed historical target.</p>
+        </article>
+        <article class="info-card compact">
+            <h3><i class="fa-solid fa-diagram-project"></i>Similarity Discovery</h3>
+            <p>K-Means groups municipalities with comparable waste, access, vulnerability, and infrastructure patterns.</p>
+        </article>
+        <article class="info-card compact">
+            <h3><i class="fa-solid fa-scale-balanced"></i>Transparent Centroids</h3>
+            <p>Cluster centroids can be interpreted as average municipal profiles, which supports academic auditability.</p>
+        </article>
+        <article class="info-card compact">
+            <h3><i class="fa-solid fa-seedling"></i>Sustainability Planning</h3>
+            <p>Clusters help compare where environmental pressure and service gaps require coordinated intervention.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Feature selection</p>
+        <h2>Signals used by the clustering model</h2>
+        <p>
+            The selected variables connect the model to SmartRecycleAI's core problem: locating municipalities
+            where recycling demand, infrastructure gaps, social vulnerability, urban growth, and environmental
+            pressure create similar planning profiles.
+        </p>
+    </div>
+    <div class="table-wrap wide">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Domain</th>
+                    <th>Reason</th>
+                    <th>Preprocessing</th>
+                    <th>Imputed Values</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in kmeans_analysis.selected_features %}
+                <tr>
+                    <td>{{ item.feature }}</td>
+                    <td>{{ item.domain }}</td>
+                    <td>{{ item.reason }}</td>
+                    <td>{{ item.transformation }}</td>
+                    <td>{{ item.missing_values_imputed|number }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Model preparation</p>
+        <h2>Preprocessing and training workflow</h2>
+    </div>
+    <div class="pipeline-flow">
+        {% for step in kmeans_analysis.preprocessing_steps %}
+        <article>
+            <span>{{ "%02d"|format(loop.index) }}</span>
+            <p>{{ step }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Model evaluation metrics</p>
+        <h2>Internal validation of clustering quality</h2>
+        <p>
+            Since K-Means is unsupervised, evaluation uses internal clustering metrics rather than classification
+            accuracy. These indicators validate compactness, separation, and the tradeoff between model detail and
+            interpretability.
+        </p>
+    </div>
+    <div class="grid four">
+        {% for metric in kmeans_analysis.evaluation_metrics %}
+        <article class="metric-card">
+            <span>{{ metric.value|decimal }}</span>
+            <h3>{{ metric.metric }}</h3>
+            <p>{{ metric.meaning }}</p>
+            <strong>{{ metric.direction }}</strong>
+            <small>{{ metric.validation_use }}</small>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_validation) }}" alt="K-Means validation metrics chart">
+            <figcaption>
+                Silhouette Score and Davies-Bouldin Index are compared across candidate K values to support model
+                selection beyond WCSS alone.
+            </figcaption>
+        </figure>
+        <article class="text-panel">
+            <h2>WCSS and Inertia Explanation</h2>
+            <p>
+                WCSS means within-cluster sum of squares. In scikit-learn K-Means, this value is reported as
+                inertia. It measures how close municipalities are to their assigned cluster centroid.
+            </p>
+            <p>
+                WCSS always decreases as K increases, so it cannot be interpreted alone. SmartRecycleAI combines
+                WCSS with Silhouette Score, Davies-Bouldin Index, and academic interpretability.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_elbow) }}" alt="K-Means elbow method chart">
+            <figcaption>{{ kmeans_analysis.k_selection_reason }}</figcaption>
+        </figure>
+        <article class="text-panel">
+            <h2>Elbow Method and K Value Explanation</h2>
+            <p>
+                The elbow method compares within-cluster inertia across candidate K values. The selected value
+                balances compact clusters with a cluster count that remains understandable for municipal planning.
+            </p>
+            <p>
+                For SmartRecycleAI, K={{ kmeans_analysis.selected_k }} separates municipalities into strategic
+                planning profiles instead of treating all priority zones as one homogeneous group.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_clusters) }}" alt="K-Means cluster scatter plot">
+            <figcaption>
+                Municipalities are plotted by demand pressure and infrastructure service gap. Cross markers show
+                cluster centers in the planning-score space.
+            </figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_centroids) }}" alt="K-Means centroid heatmap">
+            <figcaption>
+                Standardized centroids show which features are above or below the project average in each cluster.
+            </figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.kmeans_geography) }}" alt="Department-level K-Means cluster distribution">
+            <figcaption>
+                Lightweight geographic visualization by department. The repository does not include municipality
+                boundary geometry, so the platform summarizes pressure zones by department and exports CSV files
+                for future GIS integration.
+            </figcaption>
+        </figure>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Municipalities</th>
+                        <th>Dominant Cluster</th>
+                        <th>Share</th>
+                        <th>Need Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in kmeans_analysis.geographic_summary %}
+                    <tr>
+                        <td>{{ row.department_name }}</td>
+                        <td>{{ row.municipalities|number }}</td>
+                        <td>{{ row.dominant_cluster }}</td>
+                        <td>{{ row.dominant_cluster_share_pct|decimal }}%</td>
+                        <td>{{ row.average_strategic_need_score|decimal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Cluster interpretation</p>
+        <h2>Strategic recycling center recommendations</h2>
+        <p>
+            Cluster 1 has the highest average strategic need score. Higher-ranked clusters should receive stronger
+            attention for new recycling centers, satellite collection points, or capacity reinforcement.
+        </p>
+    </div>
+    <div class="grid two">
+        {% for cluster in kmeans_analysis.cluster_summary %}
+        <article class="info-card">
+            <h3><i class="fa-solid fa-location-dot"></i>{{ cluster.cluster_label }}: {{ cluster.cluster_name }}</h3>
+            <p>{{ cluster.interpretation }}</p>
+            <dl class="profile-grid">
+                <div>
+                    <dt>Municipalities</dt>
+                    <dd>{{ cluster.municipalities|number }}</dd>
+                </div>
+                <div>
+                    <dt>Share</dt>
+                    <dd>{{ cluster.municipality_share_pct|decimal }}%</dd>
+                </div>
+                <div>
+                    <dt>Strategic Need</dt>
+                    <dd>{{ cluster.average_strategic_need_score|decimal }}</dd>
+                </div>
+                <div>
+                    <dt>Dominant Signal</dt>
+                    <dd>{{ cluster.dominant_signal }}</dd>
+                </div>
+            </dl>
+            <strong>{{ cluster.recommendation }}</strong>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Operational recommendations</p>
+        <h2>How clusters support infrastructure and policy decisions</h2>
+        <p>
+            The recommendations translate clustering results into operational actions. They indicate where public
+            investment, collection coverage, capacity reinforcement, and sustainability controls should be discussed
+            first.
+        </p>
+    </div>
+    <div class="grid two">
+        {% for item in kmeans_analysis.operational_recommendations %}
+        <article class="info-card">
+            <h3><i class="fa-solid fa-compass-drafting"></i>{{ item.cluster_label }}: {{ item.cluster_name }}</h3>
+            <p><strong>Infrastructure focus:</strong> {{ item.investment_focus }}</p>
+            <p><strong>Policy use:</strong> {{ item.policy_use }}</p>
+            <p><strong>Sustainability implication:</strong> {{ item.sustainability_implication }}</p>
+            <p><strong>Example municipalities:</strong> {{ item.example_municipalities }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Centroid analysis</p>
+        <h2>Average profile of each cluster</h2>
+        <p>
+            Centroids are interpreted as the average municipal profile of each cluster. They show how population,
+            recyclable waste, service gap, infrastructure availability, poverty, and environmental pressure differ
+            across the groups discovered by K-Means.
+        </p>
+    </div>
+    <div class="table-wrap wide">
+        <table>
+            <thead>
+                <tr>
+                    {% for key in kmeans_analysis.centroid_table[0].keys() %}
+                    <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in kmeans_analysis.centroid_table %}
+                <tr>
+                    {% for value in row.values() %}
+                    <td>
+                        {% if value is number %}
+                            {{ value|decimal }}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Priority zones</p>
+        <h2>Municipalities with the strongest clustering-based need score</h2>
+        <p>
+            These records are not manual placeholders. They come from the fitted K-Means feature space and the
+            strategic need score used to rank municipalities after clustering.
+        </p>
+    </div>
+    <div class="table-wrap wide">
+        <table>
+            <thead>
+                <tr>
+                    <th>Municipality</th>
+                    <th>Department</th>
+                    <th>Cluster</th>
+                    <th>Interpretation</th>
+                    <th>Need Score</th>
+                    <th>Collection Gap</th>
+                    <th>Distance</th>
+                    <th>Recyclable Waste</th>
+                    <th>Existing Centers</th>
+                    <th>Hazardous Waste</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in kmeans_analysis.top_priority_municipalities %}
+                <tr>
+                    <td>{{ row.municipality_name }}</td>
+                    <td>{{ row.department_name }}</td>
+                    <td>{{ row.cluster_label }}</td>
+                    <td>{{ row.cluster_name }}</td>
+                    <td>{{ row.strategic_need_score|decimal }}</td>
+                    <td>{{ row.collection_gap_percentage|decimal }}%</td>
+                    <td>{{ row.collection_center_distance_km|decimal }} km</td>
+                    <td>{{ row.recyclable_kg_day|number }} kg/day</td>
+                    <td>{{ row.existing_collection_centers|number }}</td>
+                    <td>{{ row.total_hazardous_waste_kg_latest|number }} kg</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Exportable evidence</p>
+        <h2>Download clustering outputs</h2>
+        <p>
+            These files are generated by the actual pipeline and can be reused in academic reports, spreadsheets,
+            external GIS tools, or future supervised learning experiments.
+        </p>
+    </div>
+    <div class="download-grid">
+        {% for file in kmeans_analysis.download_files %}
+        <a class="download-card" href="{{ url_for('main.download_processed_file', filename=file.filename) }}">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>{{ file.label }}</span>
+            <small>{{ file.description }}</small>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <h2>Environmental and Operational Implications</h2>
+        <p>
+            K-Means does not replace expert judgment; it groups municipalities with similar pressure profiles so
+            decision makers can compare zones more systematically. High-need clusters indicate where recyclable
+            waste recovery, access improvement, social equity, and environmental risk reduction can be addressed
+            together through new recycling centers or reinforced collection capacity.
+        </p>
+        <p>
+            The generated artifacts are saved as processed CSV files, allowing the clustering results to be audited,
+            reused, and extended with future supervised recommendation models.
+        </p>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <article class="text-panel">
+            <p class="eyebrow">Model limitations</p>
+            <h2>Responsible interpretation boundaries</h2>
+            <p>
+                The clustering depends on feature quality, preprocessing assumptions, and the completeness of the
+                source datasets. Unsupervised learning discovers similarity groups; it does not prove causal impact
+                or replace municipal field validation.
+            </p>
+            <p>
+                Dataset bias, inconsistent municipal reporting, changing recycling infrastructure, evolving waste
+                generation patterns, and missing geographic geometry can affect interpretation. Results should be
+                reviewed with domain experts before investment decisions.
+            </p>
+        </article>
+        <article class="text-panel">
+            <p class="eyebrow">Future work</p>
+            <h2>Next technical improvements</h2>
+            <p>
+                Future versions can add supervised recommendation models, predictive waste forecasting, geospatial
+                optimization, IoT collection telemetry, real-time monitoring, route optimization, and reinforcement
+                learning for adaptive collection policies.
+            </p>
+            <p>
+                A production extension should also integrate municipality boundary files, cost constraints, facility
+                travel times, and feedback from environmental or municipal specialists.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Methodology references</p>
+        <h2>Academic and technical basis</h2>
+    </div>
+    <div class="reference-list">
+        <a href="https://www.mdpi.com/2504-4990/3/2/392" target="_blank" rel="noreferrer">
+            Studer et al. (2021), CRISP-ML(Q): ML process model with quality assurance.
+        </a>
+        <a href="https://digicoll.lib.berkeley.edu/record/113015?ln=en&v=pdf" target="_blank" rel="noreferrer">
+            MacQueen (1967), original K-Means clustering methodology.
+        </a>
+        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="noreferrer">
+            scikit-learn KMeans implementation documentation.
+        </a>
+        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html" target="_blank" rel="noreferrer">
+            scikit-learn Silhouette Score documentation.
+        </a>
+        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.davies_bouldin_score.html" target="_blank" rel="noreferrer">
+            scikit-learn Davies-Bouldin Index documentation.
+        </a>
+        <a href="https://datatopics.worldbank.org/what-a-waste/" target="_blank" rel="noreferrer">
+            World Bank What a Waste solid waste management analytics.
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Reproducible pipeline</p>
+    <h1>Data Pipeline</h1>
+    <p>
+        The pipeline demonstrates collection, cleaning, integration, transformation, feature preparation,
+        and model-ready output generation from the repository datasets.
+    </p>
+</section>
+
+<section class="section">
+    <div class="pipeline-flow" aria-label="Data engineering workflow">
+        <article>
+            <span>01</span>
+            <h2>Data Collection</h2>
+            <p>Read local CSV, XLS, and XLSX sources from the datasets folder.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h2>Data Cleaning</h2>
+            <p>Parse numbers, remove workbook notes, convert types, and handle missing values.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h2>Data Integration</h2>
+            <p>Join municipal, census, facility, waste, projection, and capital household records.</p>
+        </article>
+        <article>
+            <span>04</span>
+            <h2>Transformation</h2>
+            <p>Create normalized geographic keys, aggregate facilities, and align temporal projections.</p>
+        </article>
+        <article>
+            <span>05</span>
+            <h2>Feature Preparation</h2>
+            <p>Engineer access, pressure, growth, capacity, and vulnerability features.</p>
+        </article>
+        <article>
+            <span>06</span>
+            <h2>ML Output</h2>
+            <p>Write the integrated dataset and standardized model feature matrix.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Model feature set</p>
+        <h2>Selected machine learning variables</h2>
+    </div>
+    <div class="feature-tags">
+        {% for feature in model_feature_columns %}
+        <span>{{ feature }}</span>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Feature matrix</p>
+        <h2>Prepared model input preview</h2>
+    </div>
+    <div class="table-wrap wide">
+        <table>
+            <thead>
+                <tr>
+                    {% for column in feature_matrix_columns %}
+                    <th>{{ column.replace("_", " ").title() }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in feature_matrix_preview %}
+                <tr>
+                    {% for column in feature_matrix_columns %}
+                    <td>{{ row[column] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

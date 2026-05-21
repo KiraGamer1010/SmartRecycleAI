@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">CRISP-ML lifecycle</p>
+    <h1>Model Evaluation</h1>
+    <p>
+        Model evaluation verifies whether SmartRecycleAI recommendations are accurate, stable, interpretable,
+        and useful for real recycling infrastructure planning before any operational deployment.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Evaluation framework</p>
+        <h2>Technical quality and decision relevance</h2>
+        <p>
+            A model is valuable only if it generalizes beyond the training data and produces recommendations that
+            domain specialists can trust. Evaluation combines quantitative metrics, validation strategy, risk
+            analysis, and expert review.
+        </p>
+    </div>
+    <div class="grid two">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-gauge-high"></i> Performance Metrics</h3>
+            <p>
+                For classification, SmartRecycleAI can evaluate Accuracy, Precision, Recall, and F1-score. If a
+                regression target is used, RMSE can measure prediction error. Recommendation relevance, coverage,
+                and interpretability should also be tracked because the platform supports planning decisions.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-layer-group"></i> Cross Validation</h3>
+            <p>
+                Cross validation evaluates generalization by training and testing the model across different data
+                subsets. This helps detect whether results depend on one split and whether performance is consistent
+                across municipalities with different population, access, and infrastructure profiles.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Risk Analysis</h3>
+            <p>
+                Evaluation must identify overfitting, underfitting, class imbalance, biased recommendations, weak
+                regional generalization, and unstable performance on municipalities with limited facility or
+                hazardous waste evidence.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-user-check"></i> Expert Review</h3>
+            <p>
+                Environmental planners, recycling operators, and municipal specialists should review whether model
+                outputs are practically relevant. Expert review checks whether high-priority recommendations align
+                with local conditions, policy constraints, and operational feasibility.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Implemented clustering metrics</p>
+        <h2>K-Means evaluation evidence</h2>
+        <p>
+            The current implemented model is unsupervised, so the platform evaluates clustering quality with
+            internal validation metrics generated from the fitted standardized feature matrix.
+        </p>
+    </div>
+    <div class="grid four">
+        {% for metric in kmeans_analysis.evaluation_metrics %}
+        <article class="metric-card">
+            <span>{{ metric.value|decimal }}</span>
+            <h3>{{ metric.metric }}</h3>
+            <p>{{ metric.meaning }}</p>
+            <strong>{{ metric.direction }}</strong>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Metric map</p>
+        <h2>How metrics align with SmartRecycleAI use cases</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Use Case</th>
+                    <th>Possible Metrics</th>
+                    <th>Evaluation Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Priority classification</td>
+                    <td>Accuracy, Precision, Recall, F1-score</td>
+                    <td>Verify whether municipalities are assigned to the correct priority class.</td>
+                </tr>
+                <tr>
+                    <td>Recycling potential estimation</td>
+                    <td>RMSE, mean absolute error, residual analysis</td>
+                    <td>Measure numerical prediction error for continuous planning indicators.</td>
+                </tr>
+                <tr>
+                    <td>Recommendation ranking</td>
+                    <td>Recommendation relevance, Coverage, stability</td>
+                    <td>Assess whether the ranked outputs surface useful municipalities for intervention.</td>
+                </tr>
+                <tr>
+                    <td>Operational decision support</td>
+                    <td>Interpretability, expert acceptance, error severity</td>
+                    <td>Ensure model outputs remain explainable and actionable for institutional users.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

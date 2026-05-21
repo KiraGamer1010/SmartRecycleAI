@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Phase 3</p>
+    <h1>Data Engineering</h1>
+    <p>
+        The data engineering layer converts raw public and project datasets into validated analytical tables,
+        engineered features, encoded targets, and normalized variables for machine learning.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Engineering workflow</p>
+        <h2>Cleaning, integration, and preparation steps</h2>
+    </div>
+    <div class="step-grid">
+        {% for item in engineering_steps %}
+        <article class="step-card">
+            <span>{{ loop.index }}</span>
+            <h2>{{ item.step }}</h2>
+            <p>{{ item.action }}</p>
+            <strong>{{ item.impact }}</strong>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Existing scripts</p>
+        <h2>How the preprocessing scripts are used</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Script</th>
+                    <th>Original role</th>
+                    <th>Improved role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in script_explanations %}
+                <tr>
+                    <td>{{ item.script }}</td>
+                    <td>{{ item.previous_role }}</td>
+                    <td>{{ item.improvement }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.feature_scaling) }}" alt="Normalized feature boxplot">
+            <figcaption>Standardized features prepared for model experiments.</figcaption>
+        </figure>
+        <article class="text-panel">
+            <h2>Feature Engineering</h2>
+            <p>
+                The pipeline creates urbanization ratio, rurality ratio, collection gap, estimated uncollected recyclable
+                waste, center capacity pressure, access need score, recycling facility availability, hazardous waste
+                exposure, and department population growth variables.
+            </p>
+            <p>
+                These transformations improve ML quality because they convert raw measurements into decision-oriented
+                signals: demand, accessibility, vulnerability, operational capacity, and environmental pressure.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Generated outputs</p>
+        <h2>Processed artifacts</h2>
+    </div>
+    <div class="artifact-list">
+        {% for file in generated_files %}
+        <span>{{ file }}</span>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

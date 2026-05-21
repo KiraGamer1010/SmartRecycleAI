@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">CRISP-ML lifecycle</p>
+    <h1>Model Deployment</h1>
+    <p>
+        Model deployment explains how a validated SmartRecycleAI model would move from academic experimentation
+        into a reliable operational environment for recycling center recommendation and municipal decision support.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Operational readiness</p>
+        <h2>From validated model to production service</h2>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-cloud-arrow-up"></i> Production Implementation</h3>
+            <p>
+                A validated model would be integrated into the Flask platform and deployed on Render.com through
+                the existing WSGI entry point. The current web interface can present recommendations, while future
+                API endpoints can expose predictions to institutional systems or municipal dashboards.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-book-open-reader"></i> Documentation and Training</h3>
+            <p>
+                Deployment requires technical documentation, user guidance, feature definitions, model limitations,
+                and training material for staff who interpret recommendation outputs. Clear documentation helps
+                avoid misuse and supports reproducible decision making.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-clipboard-list"></i> Protocol Establishment</h3>
+            <p>
+                Production use should define monitoring procedures, incident response, change management, feedback
+                collection, model approval criteria, and escalation paths when recommendations conflict with field
+                evidence or policy constraints.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Deployment architecture</p>
+        <h2>SmartRecycleAI production flow</h2>
+    </div>
+    <div class="pipeline-flow">
+        <article>
+            <span>01</span>
+            <h2>Data Refresh</h2>
+            <p>Load updated recycling center, population, waste, and projection datasets.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h2>Pipeline Build</h2>
+            <p>Generate processed features, charts, and cached dashboard context during the build phase.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h2>Model Service</h2>
+            <p>Serve validated predictions through Flask pages or future JSON API endpoints.</p>
+        </article>
+        <article>
+            <span>04</span>
+            <h2>Decision Interface</h2>
+            <p>Expose recommendation evidence to academic, institutional, or municipal users.</p>
+        </article>
+        <article>
+            <span>05</span>
+            <h2>User Feedback</h2>
+            <p>Collect expert review and operational feedback for continuous improvement.</p>
+        </article>
+        <article>
+            <span>06</span>
+            <h2>Governance</h2>
+            <p>Track model versions, assumptions, incidents, and deployment approvals.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero-band">
+    <div class="hero-content">
+        <p class="eyebrow">AI-driven sustainability planning</p>
+        <h1>SmartRecycleAI</h1>
+        <p class="hero-copy">
+            A production-ready Flask application for intelligent recycling center recommendation,
+            waste management optimization, and academic CRISP-ML documentation.
+        </p>
+        <div class="hero-actions">
+            <a class="button primary" href="{{ url_for('main.data_understanding') }}"><i class="fa-solid fa-chart-simple"></i>Explore Data</a>
+            <a class="button secondary" href="{{ url_for('main.data_pipeline') }}"><i class="fa-solid fa-code-branch"></i>View Pipeline</a>
+        </div>
+    </div>
+    <div class="hero-panel" aria-label="Project metrics">
+        <div>
+            <span class="metric-value">{{ metrics.municipalities|number }}</span>
+            <span class="metric-label">Municipalities</span>
+        </div>
+        <div>
+            <span class="metric-value">{{ metrics.model_features|number }}</span>
+            <span class="metric-label">Model features</span>
+        </div>
+        <div>
+            <span class="metric-value">{{ metrics.priority_municipalities|number }}</span>
+            <span class="metric-label">Priority cases</span>
+        </div>
+        <div>
+            <span class="metric-value">{{ metrics.registered_recycling_facilities|number }}</span>
+            <span class="metric-label">Facility records</span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Academic scope</p>
+        <h2>Project objective</h2>
+        <p>
+            SmartRecycleAI evaluates municipal recycling demand, collection accessibility, social vulnerability,
+            environmental pressure, and facility capacity to support decisions about where recycling collection
+            centers should be prioritized.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-location-crosshairs"></i> Recommendation Focus</h3>
+            <p>Classifies municipalities by priority and prepares features for future supervised learning experiments.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-industry"></i> Operational Evidence</h3>
+            <p>Uses registered recycling facility capacity and active status to measure existing infrastructure.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-leaf"></i> Sustainability Impact</h3>
+            <p>Connects recyclable waste potential, hazardous waste pressure, and demographic growth to environmental planning.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Dashboard preview</p>
+        <h2>Current recommendation profile</h2>
+    </div>
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.target_distribution) }}" alt="Bar chart of municipality recommendation priority">
+            <figcaption>Priority classes prepared from the model target.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.eca_departments) }}" alt="Bar chart of top departments by recycling facilities">
+            <figcaption>Registered recycling facility distribution by department.</figcaption>
+        </figure>
+    </div>
+</section>
+{% endblock %}

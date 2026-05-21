@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">CRISP-ML lifecycle</p>
+    <h1>Monitoring and Maintenance</h1>
+    <p>
+        Monitoring and maintenance ensure that SmartRecycleAI recommendations remain reliable as recycling
+        infrastructure, population dynamics, waste generation patterns, and environmental risk variables evolve.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Lifecycle control</p>
+        <h2>Keeping recommendations reliable over time</h2>
+    </div>
+    <div class="grid two">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-satellite-dish"></i> Continuous Supervision</h3>
+            <p>
+                Production models should be monitored regularly for prediction stability, class distribution shifts,
+                data freshness, missing values, feature range changes, and unexpected recommendation patterns.
+                Supervision helps detect problems before they affect planning decisions.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-rotate"></i> Model Updating</h3>
+            <p>
+                SmartRecycleAI should be retrained or recalibrated when new recycling center records, census updates,
+                population projections, hazardous waste reports, or collection coverage data become available. Updates
+                must preserve version control and reproducibility.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-wave-square"></i> Degradation Detection</h3>
+            <p>
+                Data drift occurs when input data changes, such as new facility capacity or population growth.
+                Concept drift occurs when the relationship between indicators and recommendation priority changes.
+                Operational monitoring should track data drift and concept drift continuously because both can
+                reduce model quality and must trigger review.
+            </p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-lock"></i> Risk Review</h3>
+            <p>
+                Ongoing risk review evaluates vulnerabilities, data quality controls, contextual changes, policy
+                updates, and potential bias. Recommendations should remain explainable, auditable, and aligned with
+                field evidence.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Maintenance signals</p>
+        <h2>What SmartRecycleAI should watch</h2>
+    </div>
+    <div class="step-grid">
+        <article class="step-card">
+            <span><i class="fa-solid fa-recycle"></i></span>
+            <h2>Recycling Infrastructure</h2>
+            <p>Facilities can open, close, change status, or report different operating capacity.</p>
+            <strong>Maintenance action: refresh facility registry features.</strong>
+        </article>
+        <article class="step-card">
+            <span><i class="fa-solid fa-people-group"></i></span>
+            <h2>Population Dynamics</h2>
+            <p>Population and household projections can change service demand and access pressure.</p>
+            <strong>Maintenance action: update demographic projection features.</strong>
+        </article>
+        <article class="step-card">
+            <span><i class="fa-solid fa-chart-area"></i></span>
+            <h2>Waste Patterns</h2>
+            <p>Waste generation, recyclable potential, and hazardous waste reports can evolve over time.</p>
+            <strong>Maintenance action: monitor environmental pressure drift.</strong>
+        </article>
+    </div>
+</section>
+{% endblock %}

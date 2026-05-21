@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">CRISP-ML methodology</p>
+    <h1>Structured Machine Learning Process</h1>
+    <p>
+        The application implements a complete CRISP-ML lifecycle adapted to recycling accessibility,
+        environmental analytics, model-oriented preparation, deployment governance, and long-term
+        recommendation reliability.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Lifecycle visualization</p>
+        <h2>End-to-end CRISP-ML flow</h2>
+        <p>
+            SmartRecycleAI presents the complete academic lifecycle as a connected production workflow: business
+            goals define the analytical question, data pipelines create evidence, K-Means produces planning
+            profiles, evaluation validates clustering quality, and deployment plus monitoring prepare the system
+            for real operational use.
+        </p>
+    </div>
+    <div class="lifecycle-map">
+        <article>
+            <span>01</span>
+            <h2>Business Understanding</h2>
+            <p>Define recycling access, sustainability, and municipal decision goals.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h2>Data Understanding</h2>
+            <p>Profile public datasets, quality issues, relationships, and variables.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h2>Data Engineering</h2>
+            <p>Clean, integrate, transform, and scale model-ready municipal features.</p>
+        </article>
+        <article>
+            <span>04</span>
+            <h2>Model Engineering</h2>
+            <p>Fit K-Means over standardized sustainability and infrastructure signals.</p>
+        </article>
+        <article>
+            <span>05</span>
+            <h2>Model Evaluation</h2>
+            <p>Evaluate Silhouette Score, Davies-Bouldin Index, inertia, and WCSS.</p>
+        </article>
+        <article>
+            <span>06</span>
+            <h2>Deployment</h2>
+            <p>Serve the Flask platform locally and through Render with generated artifacts.</p>
+        </article>
+        <article>
+            <span>07</span>
+            <h2>Monitoring</h2>
+            <p>Track drift, infrastructure changes, data quality, and model reliability.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="timeline">
+        <article>
+            <span>1</span>
+            <h2>Business Understanding</h2>
+            <p>Defines the real-world problem, stakeholders, objectives, risks, feasibility, and expected sustainability impact.</p>
+        </article>
+        <article>
+            <span>2</span>
+            <h2>Data Understanding</h2>
+            <p>Profiles each source dataset, analyzes structure and quality, and explains how the datasets connect.</p>
+        </article>
+        <article>
+            <span>3</span>
+            <h2>Data Engineering</h2>
+            <p>Documents cleaning, transformation, integration, feature engineering, encoding, and scaling.</p>
+        </article>
+        <article>
+            <span>4</span>
+            <h2>Model Engineering</h2>
+            <p>Defines algorithm selection and includes a real K-Means clustering implementation for municipal planning profiles.</p>
+        </article>
+        <article>
+            <span>5</span>
+            <h2>Model Evaluation</h2>
+            <p>Verifies performance, generalization, risks, and practical relevance through metrics and expert review.</p>
+        </article>
+        <article>
+            <span>6</span>
+            <h2>Model Deployment</h2>
+            <p>Explains how validated models would be integrated into Flask, Render, APIs, and operational workflows.</p>
+        </article>
+        <article>
+            <span>7</span>
+            <h2>Monitoring and Maintenance</h2>
+            <p>Defines continuous supervision, model updating, drift detection, and ongoing risk review.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Process alignment</p>
+        <h2>How CRISP-ML is implemented</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Implementation in SmartRecycleAI</th>
+                    <th>Academic evidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Business Understanding</td>
+                    <td>Problem framing, expected value, feasibility, and risk analysis.</td>
+                    <td>Dedicated business page with objectives, questions, limitations, and impact.</td>
+                </tr>
+                <tr>
+                    <td>Data Understanding</td>
+                    <td>Dataset catalog, EDA, missing values, distributions, correlations, and relationships.</td>
+                    <td>Generated charts, statistical tables, and documented data source contributions.</td>
+                </tr>
+                <tr>
+                    <td>Data Engineering</td>
+                    <td>Reusable Python pipeline for cleaning, integration, transformations, encoding, and scaling.</td>
+                    <td>Processed CSV artifacts and script explanations tied to each preprocessing file.</td>
+                </tr>
+                <tr>
+                    <td>Model Engineering</td>
+                    <td>Algorithm selection, training strategy, validation planning, hyperparameter tuning, and K-Means clustering.</td>
+                    <td>Dedicated model engineering page plus a real K-Means analysis with selected features, scaling, elbow method, clusters, and centroids.</td>
+                </tr>
+                <tr>
+                    <td>Model Evaluation</td>
+                    <td>Metrics, cross validation, risk analysis, and expert review for recommendation quality.</td>
+                    <td>Dedicated evaluation page with classification, regression, ranking, and interpretability metrics.</td>
+                </tr>
+                <tr>
+                    <td>Model Deployment</td>
+                    <td>Production integration through Flask, Render, future APIs, documentation, and operational protocols.</td>
+                    <td>Dedicated deployment page with a production flow for institutional or municipal use.</td>
+                </tr>
+                <tr>
+                    <td>Monitoring and Maintenance</td>
+                    <td>Continuous supervision, model updating, degradation detection, and risk review.</td>
+                    <td>Dedicated monitoring page explaining data drift, concept drift, and evolving environmental variables.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

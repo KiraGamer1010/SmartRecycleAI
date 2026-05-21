@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Phase 2</p>
+    <h1>Data Understanding</h1>
+    <p>
+        This section profiles every local dataset, explains its source and structure, and shows how the data
+        contributes to recycling center recommendation and sustainability analysis.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Dataset inventory</p>
+        <h2>Source structure and contribution</h2>
+    </div>
+    <div class="dataset-list">
+        {% for item in dataset_catalog %}
+        <article class="dataset-card">
+            <div>
+                <h2>{{ item.display_name }}</h2>
+                <p><strong>Source:</strong> {{ item.source }}</p>
+                <p><strong>Role:</strong> {{ item.role }}</p>
+                <p><strong>Contribution:</strong> {{ item.contribution }}</p>
+                <p><strong>Quality note:</strong> {{ item.quality_notes }}</p>
+            </div>
+            <dl class="profile-grid">
+                <div><dt>Rows</dt><dd>{{ item.profile.rows|number }}</dd></div>
+                <div><dt>Columns</dt><dd>{{ item.profile.columns|number }}</dd></div>
+                <div><dt>Numeric</dt><dd>{{ item.profile.numeric_variables|number }}</dd></div>
+                <div><dt>Categorical</dt><dd>{{ item.profile.categorical_variables|number }}</dd></div>
+                <div><dt>Missing</dt><dd>{{ item.profile.missing_rate|decimal }}%</dd></div>
+                <div><dt>Duplicates</dt><dd>{{ item.profile.duplicate_rows|number }}</dd></div>
+            </dl>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">EDA visuals</p>
+        <h2>Missing values, distributions, and relationships</h2>
+    </div>
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.missing_values) }}" alt="Missing value rate by dataset">
+            <figcaption>Missing cell rate after source-specific parsing and cleaning.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.recycling_distribution) }}" alt="Distribution of monthly recycling potential">
+            <figcaption>Distribution analysis for recycling potential.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.correlation_heatmap) }}" alt="Correlation heatmap for selected numerical features">
+            <figcaption>Correlation analysis across social, infrastructure, and waste variables.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.poverty_access) }}" alt="Scatter plot of poverty index and distance to collection center">
+            <figcaption>Relationship between vulnerability and recycling accessibility.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Dataset relationships</p>
+        <h2>How the sources connect</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Relationship</th>
+                    <th>Datasets</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in relationships %}
+                <tr>
+                    <td>{{ item.relationship }}</td>
+                    <td>{{ item.datasets }}</td>
+                    <td>{{ item.purpose }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Statistical report</p>
+        <h2>Selected numerical summary</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Mean</th>
+                    <th>Std.</th>
+                    <th>Min</th>
+                    <th>Median</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in statistical_summary %}
+                <tr>
+                    <td>{{ row.feature }}</td>
+                    <td>{{ row["mean"] }}</td>
+                    <td>{{ row["std"] }}</td>
+                    <td>{{ row["min"] }}</td>
+                    <td>{{ row["50%"] }}</td>
+                    <td>{{ row["max"] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

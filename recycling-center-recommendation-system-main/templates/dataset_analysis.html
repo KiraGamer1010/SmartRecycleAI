@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Analytical evidence</p>
+    <h1>Dataset Analysis</h1>
+    <p>
+        The integrated SmartRecycleAI dataset combines recommendation targets, municipal indicators,
+        census references, facility capacity, hazardous waste records, and demographic projections.
+    </p>
+</section>
+
+<section class="section stats-row">
+    <article>
+        <span>{{ priority_counts["High priority"]|number }}</span>
+        <p>High priority municipalities</p>
+    </article>
+    <article>
+        <span>{{ priority_counts["Priority"]|number }}</span>
+        <p>Priority municipalities</p>
+    </article>
+    <article>
+        <span>{{ priority_counts["Not priority"]|number }}</span>
+        <p>Not priority municipalities</p>
+    </article>
+    <article>
+        <span>{{ metrics.processed_artifacts|number }}</span>
+        <p>Processed artifacts</p>
+    </article>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Comparative analysis</p>
+        <h2>Priority, access, and environmental indicators</h2>
+    </div>
+    <div class="grid two">
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.target_distribution) }}" alt="Priority distribution chart">
+            <figcaption>Target class distribution for recommendation preparation.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.hazardous_trend) }}" alt="Hazardous waste trend chart">
+            <figcaption>Historical hazardous waste pressure for the covered municipalities.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.bogota_growth) }}" alt="Capital household growth chart">
+            <figcaption>Household growth pressure by locality in the capital dataset.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            <img src="{{ url_for('static', filename='generated/' ~ charts.correlation_heatmap) }}" alt="Correlation chart">
+            <figcaption>Numerical relationships used to evaluate feature behavior.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Integrated preview</p>
+        <h2>Modeling dataset sample</h2>
+    </div>
+    <div class="table-wrap wide">
+        <table>
+            <thead>
+                <tr>
+                    {% for column in dataset_preview_columns %}
+                    <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in dataset_preview %}
+                <tr>
+                    {% for value in row.values() %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

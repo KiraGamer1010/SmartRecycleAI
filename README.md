@@ -1,84 +1,50 @@
-# SmartRecycleAI ♻️🤖
+# SmartRecycleAI Workspace
 
-SmartRecycleAI is an advanced intelligent recycling platform designed to improve waste classification and environmental sustainability using Artificial Intelligence, Machine Learning, Computer Vision, and IoT technologies.
+This workspace contains SmartRecycleAI assets and experiments. The production-ready academic Flask application is located in:
 
----
-
-## 🚀 Main Features
-
-* Intelligent waste classification
-* AI-powered environmental analysis
-* Computer Vision integration
-* Real-time data processing
-* Scalable backend architecture
-* Smart dashboards and analytics
-* IoT device compatibility
-* Sustainable decision-making support
-
----
-
-## 🧠 Technologies
-
-### Frontend
-
-* React
-* Vite
-* TailwindCSS
-
-### Backend
-
-* FastAPI
-* Python
-
-### Database
-
-* PostgreSQL
-
-### Artificial Intelligence
-
-* Machine Learning
-* Computer Vision
-* TensorFlow / PyTorch
-
----
-
-## 📂 Project Architecture
-
-```bash
-SmartRecycleAI/
-│
-├── frontend/
-├── backend/
-├── ai-services/
-├── database/
-├── docs/
-└── infrastructure/
+```text
+recycling-center-recommendation-system-main/
 ```
 
----
+Use that folder as the main project root for local execution, GitHub delivery, and Render deployment.
 
-## 🎯 Project Goal
+## Main Deliverable
 
-Develop an intelligent ecosystem capable of optimizing recycling processes through predictive analysis, automated waste detection, and scalable AI-driven solutions.
+The Flask deliverable provides:
 
----
+- CRISP-ML academic methodology pages.
+- Intelligent recycling center recommendation analysis.
+- Integrated municipal, census, recycling facility, hazardous waste, and projection datasets.
+- A reusable data engineering pipeline.
+- Professional AI and sustainability themed UI.
+- Render-compatible deployment files.
 
-## 👨‍💻 Authors
+## Run the Flask Project
 
-* Juan Esteban Castiblanco
-* Cristian Mauricio Muñoz
-* Jean Pierre Gonzalez
-* Juan David Capera
+```powershell
+cd C:\SmartRecycleAI\recycling-center-recommendation-system-main
+pip install -r requirements.txt
+python createDataset\create_dataset.py
+flask --app app run
+```
 
----
+Open:
 
-## 🏛 Institution
+```text
+http://127.0.0.1:5000
+```
 
-Universidad de Cundinamarca
-Chía, Cundinamarca — Colombia
+## Authors
 
----
+- Juan Esteban Castiblanco
+- Cristian Mauricio Munoz
+- Jean Pierre Gonzalez
+- Juan David Capera
 
-## 📅 Year
+## Institution
+
+University of Cundinamarca, Chia Campus, Colombia.
+
+## Year
 
 2026

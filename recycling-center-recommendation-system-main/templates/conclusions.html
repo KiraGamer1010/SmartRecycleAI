@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <p class="eyebrow">Academic closure</p>
+    <h1>Conclusions</h1>
+    <p>
+        SmartRecycleAI now provides a complete academic and technical foundation for recycling center
+        recommendation, from business framing to reproducible model-oriented data preparation.
+    </p>
+</section>
+
+<section class="section">
+    <div class="grid three">
+        <article class="info-card">
+            <h2>Data Value</h2>
+            <p>
+                The repository datasets support a multidimensional view of recycling needs by combining demand,
+                social vulnerability, facility capacity, hazardous waste pressure, population references, and growth.
+            </p>
+        </article>
+        <article class="info-card">
+            <h2>Engineering Value</h2>
+            <p>
+                The shared pipeline improves reproducibility by using one implementation for cleaning scripts,
+                generated charts, processed datasets, and Flask pages.
+            </p>
+        </article>
+        <article class="info-card">
+            <h2>Decision Value</h2>
+            <p>
+                The prepared feature matrix can support classification, ranking, scenario analysis, and future
+                recommendation experiments for recycling infrastructure planning.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Final assessment</p>
+        <h2>What the analysis demonstrates</h2>
+    </div>
+    <div class="text-panel">
+        <p>
+            Municipal recommendation priority is not explained by a single variable. A credible recycling center
+            planning system must evaluate waste generation, recyclable potential, current infrastructure, access
+            distance, collection coverage, poverty-related vulnerability, and projected demographic pressure together.
+        </p>
+        <p>
+            The current implementation prepares that evidence base in a transparent way and documents the limitations
+            that must be considered before deploying a model in real public-sector decision making.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Recommended next modeling phase</p>
+        <h2>Future validation path</h2>
+    </div>
+    <div class="grid two">
+        <article class="info-card">
+            <h3>Model training</h3>
+            <p>Train interpretable classifiers and ranking models on the generated feature matrix, then compare feature importance against planning expectations.</p>
+        </article>
+        <article class="info-card">
+            <h3>Expert review</h3>
+            <p>Validate high-priority recommendations with environmental planners, recycling operators, and municipal field evidence.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}
