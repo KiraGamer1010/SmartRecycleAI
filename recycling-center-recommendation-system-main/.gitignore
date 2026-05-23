@@ -21,5 +21,15 @@ datasets/processed/*
 !datasets/processed/.gitkeep
 static/generated/*
 !static/generated/.gitkeep
+!static/generated/model_engineering/
+!static/generated/model_engineering/**
+!static/generated/model_evaluation/
+!static/generated/model_evaluation/**
+!static/generated/prediction_system/
+!static/generated/prediction_system/**
 reports/*
 !reports/.gitkeep
+!reports/model_engineering/
+!reports/model_engineering/**
+!reports/model_evaluation/
+!reports/model_evaluation/**

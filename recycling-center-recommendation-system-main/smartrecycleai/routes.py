@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flask import abort, Blueprint, render_template, send_from_directory
+from flask import abort, Blueprint, render_template, request, send_from_directory
 
 from .data_pipeline import PROCESSED_DIR, get_dashboard_context
+from .model_training import get_model_training_context
+from .prediction_service import prediction_form_context, predict_priority, validate_prediction_input
 
 
 main_bp = Blueprint("main", __name__)
@@ -64,9 +66,11 @@ def data_engineering():
 
 @main_bp.route("/model-engineering")
 def model_engineering():
+    context = page_context("model_engineering", "Model Engineering")
+    context["supervised_modeling"] = get_model_training_context()
     return render_template(
         "model_engineering.html",
-        **page_context("model_engineering", "Model Engineering"),
+        **context,
     )
 
 
@@ -90,10 +94,39 @@ def download_processed_file(filename: str):
 
 @main_bp.route("/model-evaluation")
 def model_evaluation():
+    context = page_context("model_evaluation", "Model Evaluation")
+    context["supervised_modeling"] = get_model_training_context()
     return render_template(
         "model_evaluation.html",
-        **page_context("model_evaluation", "Model Evaluation"),
+        **context,
     )
+
+
+@main_bp.route("/prediction-system", methods=["GET", "POST"])
+def prediction_system():
+    context = page_context("prediction_system", "Prediction System")
+    form_context = prediction_form_context()
+    errors: list[str] = []
+    prediction_result = None
+    submitted_values = {}
+
+    if request.method == "POST":
+        submitted_values, errors = validate_prediction_input(request.form)
+        if not errors:
+            prediction_result = predict_priority(submitted_values)
+            if not prediction_result.get("available"):
+                errors.append(prediction_result.get("error", "The prediction could not be generated."))
+                prediction_result = None
+
+    context.update(
+        {
+            "prediction_form": form_context,
+            "prediction_errors": errors,
+            "prediction_result": prediction_result,
+            "submitted_values": submitted_values,
+        }
+    )
+    return render_template("prediction_system.html", **context)
 
 
 @main_bp.route("/model-deployment")

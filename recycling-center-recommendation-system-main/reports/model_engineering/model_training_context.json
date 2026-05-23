@@ -1,0 +1,593 @@
+{
+  "available": true,
+  "generated_at": "2026-05-22T22:27:17+00:00",
+  "dataset_split": {
+    "total_records": 1122,
+    "train_records": 897,
+    "test_records": 225,
+    "test_size": 0.2,
+    "random_state": 42,
+    "target_column": "priority_class_id",
+    "target_description": "Municipality recycling center priority class",
+    "class_distribution": [
+      {
+        "class_label": "Not priority",
+        "records": 393
+      },
+      {
+        "class_label": "Priority",
+        "records": 392
+      },
+      {
+        "class_label": "High priority",
+        "records": 337
+      }
+    ],
+    "feature_count": 20
+  },
+  "feature_rows": [
+    {
+      "column": "total_population",
+      "label": "Total population",
+      "minimum": 800,
+      "median": 14558.0,
+      "maximum": 11000000,
+      "default": 14558.0
+    },
+    {
+      "column": "urbanization_ratio",
+      "label": "Urbanization ratio",
+      "minimum": 0.109676,
+      "median": 0.602152,
+      "maximum": 0.989983,
+      "default": 0.602152
+    },
+    {
+      "column": "population_density_per_km2",
+      "label": "Population density",
+      "minimum": 0.09,
+      "median": 59.11,
+      "maximum": 106119.15,
+      "default": 59.11
+    },
+    {
+      "column": "municipal_multidimensional_poverty_index",
+      "label": "Poverty index",
+      "minimum": 4.5,
+      "median": 40.8,
+      "maximum": 98.5,
+      "default": 40.8
+    },
+    {
+      "column": "water_deprivation_percentage",
+      "label": "Water deprivation",
+      "minimum": 0.2,
+      "median": 21.4,
+      "maximum": 99.0,
+      "default": 21.4
+    },
+    {
+      "column": "waste_kg_per_capita_day",
+      "label": "Waste per capita",
+      "minimum": 0.3,
+      "median": 0.5905,
+      "maximum": 0.88,
+      "default": 0.5905
+    },
+    {
+      "column": "recyclable_kg_day",
+      "label": "Recyclable waste per day",
+      "minimum": 27.0,
+      "median": 1276.5,
+      "maximum": 1576179.0,
+      "default": 1276.5
+    },
+    {
+      "column": "collection_coverage_percentage",
+      "label": "Collection coverage",
+      "minimum": 10.0,
+      "median": 42.15,
+      "maximum": 91.6,
+      "default": 42.15
+    },
+    {
+      "column": "collection_gap_percentage",
+      "label": "Collection gap",
+      "minimum": 8.4,
+      "median": 57.85,
+      "maximum": 90.0,
+      "default": 57.85
+    },
+    {
+      "column": "collection_center_distance_km",
+      "label": "Distance to center",
+      "minimum": 4.21,
+      "median": 20.775,
+      "maximum": 49.78,
+      "default": 20.775
+    },
+    {
+      "column": "existing_collection_centers",
+      "label": "Existing centers",
+      "minimum": 0,
+      "median": 0.0,
+      "maximum": 19,
+      "default": 0.0
+    },
+    {
+      "column": "road_access_score",
+      "label": "Road access score",
+      "minimum": 1,
+      "median": 2.0,
+      "maximum": 3,
+      "default": 2.0
+    },
+    {
+      "column": "estimated_uncollected_recyclable_kg_day",
+      "label": "Uncollected recyclable waste",
+      "minimum": 13.95,
+      "median": 716.41,
+      "maximum": 641504.853,
+      "default": 716.41
+    },
+    {
+      "column": "center_capacity_pressure_score",
+      "label": "Center pressure",
+      "minimum": 27.0,
+      "median": 1172.5,
+      "maximum": 262696.5,
+      "default": 1172.5
+    },
+    {
+      "column": "eca_facility_count",
+      "label": "Registered facilities",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 3082.0,
+      "default": 0.0
+    },
+    {
+      "column": "active_eca_facility_count",
+      "label": "Active facilities",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 2280.0,
+      "default": 0.0
+    },
+    {
+      "column": "operation_capacity_tons",
+      "label": "Operation capacity",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 1326915.645,
+      "default": 0.0
+    },
+    {
+      "column": "storage_capacity_tons",
+      "label": "Storage capacity",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 5256248.77,
+      "default": 0.0
+    },
+    {
+      "column": "total_hazardous_waste_kg_latest",
+      "label": "Latest hazardous waste",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 17556297.1,
+      "default": 0.0
+    },
+    {
+      "column": "department_population_growth_2018_2030_pct",
+      "label": "Department growth",
+      "minimum": 2.717234,
+      "median": 12.141894,
+      "maximum": 62.680359,
+      "default": 12.141894
+    }
+  ],
+  "models": [
+    {
+      "slug": "logistic_regression",
+      "display_name": "Logistic Regression",
+      "short_name": "Logistic",
+      "artifact": "logistic_regression.pkl",
+      "explanation": "Logistic Regression is an interpretable linear classifier that estimates the probability of each municipality priority class from standardized planning features.",
+      "usefulness": "It is useful for SmartRecycleAI because it provides a transparent baseline: the project can see how far a simple probabilistic model can go before using more flexible tree-based algorithms.",
+      "code_explanation": "The training pipeline imputes missing numerical values with training-set medians, scales features with StandardScaler, and fits LogisticRegression with balanced class weights.",
+      "hyperparameters": {
+        "max_iter": 2000,
+        "class_weight": "balanced",
+        "solver": "lbfgs",
+        "random_state": 42
+      },
+      "metrics": {
+        "accuracy": 0.7867,
+        "precision": 0.7846,
+        "recall": 0.7867,
+        "f1_score": 0.7854,
+        "roc_auc_ovr": 0.9371
+      },
+      "confusion_matrix": [
+        [
+          67,
+          12,
+          0
+        ],
+        [
+          15,
+          53,
+          11
+        ],
+        [
+          0,
+          10,
+          57
+        ]
+      ],
+      "chart_paths": {
+        "confusion_matrix": "generated/model_evaluation/confusion_matrix_logistic_regression.png",
+        "roc_curve": "generated/model_evaluation/roc_curve_logistic_regression.png"
+      },
+      "example_probability": [
+        0.4294,
+        0.5643,
+        0.0063
+      ]
+    },
+    {
+      "slug": "decision_tree",
+      "display_name": "Decision Tree",
+      "short_name": "Decision Tree",
+      "artifact": "decision_tree.pkl",
+      "explanation": "A Decision Tree learns rule-based splits that separate municipalities by waste, access, infrastructure, and vulnerability indicators.",
+      "usefulness": "It is useful for academic review because its decisions can be explained as a sequence of conditions, which helps connect model behavior with recycling planning logic.",
+      "code_explanation": "The training pipeline imputes missing values and fits a controlled DecisionTreeClassifier with maximum depth and minimum leaf restrictions to reduce overfitting.",
+      "hyperparameters": {
+        "max_depth": 6,
+        "min_samples_leaf": 8,
+        "class_weight": "balanced",
+        "random_state": 42
+      },
+      "metrics": {
+        "accuracy": 0.8978,
+        "precision": 0.9014,
+        "recall": 0.8978,
+        "f1_score": 0.8987,
+        "roc_auc_ovr": 0.9568
+      },
+      "confusion_matrix": [
+        [
+          71,
+          8,
+          0
+        ],
+        [
+          4,
+          71,
+          4
+        ],
+        [
+          0,
+          7,
+          60
+        ]
+      ],
+      "chart_paths": {
+        "confusion_matrix": "generated/model_evaluation/confusion_matrix_decision_tree.png",
+        "roc_curve": "generated/model_evaluation/roc_curve_decision_tree.png"
+      },
+      "example_probability": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "slug": "random_forest",
+      "display_name": "Random Forest",
+      "short_name": "Random Forest",
+      "artifact": "random_forest.pkl",
+      "explanation": "Random Forest combines many decision trees and averages their votes, improving stability and reducing the risk that one tree overfits the training data.",
+      "usefulness": "It is useful for SmartRecycleAI because recycling priority depends on nonlinear interactions between demand, collection gaps, facility capacity, social vulnerability, and environmental pressure.",
+      "code_explanation": "The training pipeline imputes missing values and fits a RandomForestClassifier with reproducible random state, balanced class weights, and controlled depth.",
+      "hyperparameters": {
+        "n_estimators": 220,
+        "max_depth": 10,
+        "min_samples_leaf": 4,
+        "class_weight": "balanced",
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "metrics": {
+        "accuracy": 0.92,
+        "precision": 0.92,
+        "recall": 0.92,
+        "f1_score": 0.9198,
+        "roc_auc_ovr": 0.9908
+      },
+      "confusion_matrix": [
+        [
+          75,
+          4,
+          0
+        ],
+        [
+          7,
+          69,
+          3
+        ],
+        [
+          0,
+          4,
+          63
+        ]
+      ],
+      "chart_paths": {
+        "confusion_matrix": "generated/model_evaluation/confusion_matrix_random_forest.png",
+        "roc_curve": "generated/model_evaluation/roc_curve_random_forest.png"
+      },
+      "example_probability": [
+        0.6405,
+        0.3584,
+        0.0011
+      ]
+    }
+  ],
+  "metric_rows": [
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.7867,
+      "precision": 0.7846,
+      "recall": 0.7867,
+      "f1_score": 0.7854,
+      "roc_auc_ovr": 0.9371
+    },
+    {
+      "model": "Decision Tree",
+      "accuracy": 0.8978,
+      "precision": 0.9014,
+      "recall": 0.8978,
+      "f1_score": 0.8987,
+      "roc_auc_ovr": 0.9568
+    },
+    {
+      "model": "Random Forest",
+      "accuracy": 0.92,
+      "precision": 0.92,
+      "recall": 0.92,
+      "f1_score": 0.9198,
+      "roc_auc_ovr": 0.9908
+    }
+  ],
+  "hyperparameter_rows": [
+    {
+      "model": "Logistic Regression",
+      "parameter": "max_iter",
+      "value": 2000
+    },
+    {
+      "model": "Logistic Regression",
+      "parameter": "class_weight",
+      "value": "balanced"
+    },
+    {
+      "model": "Logistic Regression",
+      "parameter": "solver",
+      "value": "lbfgs"
+    },
+    {
+      "model": "Logistic Regression",
+      "parameter": "random_state",
+      "value": 42
+    },
+    {
+      "model": "Decision Tree",
+      "parameter": "max_depth",
+      "value": 6
+    },
+    {
+      "model": "Decision Tree",
+      "parameter": "min_samples_leaf",
+      "value": 8
+    },
+    {
+      "model": "Decision Tree",
+      "parameter": "class_weight",
+      "value": "balanced"
+    },
+    {
+      "model": "Decision Tree",
+      "parameter": "random_state",
+      "value": 42
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "n_estimators",
+      "value": 220
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "max_depth",
+      "value": 10
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "min_samples_leaf",
+      "value": 4
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "class_weight",
+      "value": "balanced"
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "random_state",
+      "value": 42
+    },
+    {
+      "model": "Random Forest",
+      "parameter": "n_jobs",
+      "value": -1
+    }
+  ],
+  "prediction_examples": [
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 41872,
+      "municipality_name": "VILLAVIEJA",
+      "actual_class": "Not priority",
+      "predicted_class": "Priority",
+      "confidence": 0.5643
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 8433,
+      "municipality_name": "MALAMBO",
+      "actual_class": "Not priority",
+      "predicted_class": "Not priority",
+      "confidence": 0.7984
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 54250,
+      "municipality_name": "EL TARRA",
+      "actual_class": "High priority",
+      "predicted_class": "High priority",
+      "confidence": 0.9986
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 94884,
+      "municipality_name": "PUERTO COLOMBIA",
+      "actual_class": "High priority",
+      "predicted_class": "High priority",
+      "confidence": 1.0
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 5887,
+      "municipality_name": "YARUMAL",
+      "actual_class": "Priority",
+      "predicted_class": "Priority",
+      "confidence": 0.6745
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 73555,
+      "municipality_name": "PLANADAS",
+      "actual_class": "High priority",
+      "predicted_class": "High priority",
+      "confidence": 0.873
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 15696,
+      "municipality_name": "SANTA SOF\u00cdA",
+      "actual_class": "Not priority",
+      "predicted_class": "Priority",
+      "confidence": 0.5615
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 70124,
+      "municipality_name": "CAIMITO",
+      "actual_class": "High priority",
+      "predicted_class": "High priority",
+      "confidence": 0.9229
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 66318,
+      "municipality_name": "GU\u00c1TICA",
+      "actual_class": "Not priority",
+      "predicted_class": "Not priority",
+      "confidence": 0.7269
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 85410,
+      "municipality_name": "TAURAMENA",
+      "actual_class": "Not priority",
+      "predicted_class": "Not priority",
+      "confidence": 0.8197
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 68684,
+      "municipality_name": "SAN JOS\u00c9 DE MIRANDA",
+      "actual_class": "Priority",
+      "predicted_class": "Priority",
+      "confidence": 0.5832
+    },
+    {
+      "model": "Logistic Regression",
+      "municipality_code": 19809,
+      "municipality_name": "TIMBIQU\u00cd",
+      "actual_class": "High priority",
+      "predicted_class": "High priority",
+      "confidence": 0.952
+    }
+  ],
+  "best_model": {
+    "slug": "random_forest",
+    "display_name": "Random Forest",
+    "selection_metric": "Highest weighted F1-score, with accuracy as tie-breaker.",
+    "metrics": {
+      "accuracy": 0.92,
+      "precision": 0.92,
+      "recall": 0.92,
+      "f1_score": 0.9198,
+      "roc_auc_ovr": 0.9908
+    },
+    "artifact": "best_model.pkl",
+    "explanation": "Random Forest was selected because it achieved the strongest weighted F1-score on the held-out test data while preserving reliable precision and recall across priority classes."
+  },
+  "charts": {
+    "model_engineering": {
+      "training_results_comparison": "generated/model_engineering/training_results_comparison.png",
+      "prediction_distribution": "generated/model_engineering/prediction_distribution.png",
+      "model_performance_summary": "generated/model_engineering/model_performance_summary.png"
+    },
+    "model_evaluation": {
+      "metrics_comparison": "generated/model_evaluation/metrics_comparison_chart.png",
+      "roc_curve_comparison": "generated/model_evaluation/roc_curve_comparison.png",
+      "best_model_comparison": "generated/model_evaluation/best_model_comparison.png"
+    },
+    "prediction_system": {
+      "default_probability_profile": "generated/prediction_system/default_probability_profile.png"
+    }
+  },
+  "artifact_files": {
+    "models": [
+      "logistic_regression.pkl",
+      "decision_tree.pkl",
+      "random_forest.pkl",
+      "best_model.pkl"
+    ],
+    "reports": [
+      "model_engineering\\model_training_context.json",
+      "model_evaluation\\model_evaluation_results.json",
+      "model_evaluation\\model_metrics.csv",
+      "model_engineering\\prediction_examples.csv"
+    ]
+  },
+  "roc_strategy": "The target has three classes, so ROC curves are calculated with a multiclass One-vs-Rest strategy using predicted probabilities when each model exposes predict_proba.",
+  "required_chart_paths": [
+    "generated/model_engineering/training_results_comparison.png",
+    "generated/model_engineering/prediction_distribution.png",
+    "generated/model_engineering/model_performance_summary.png",
+    "generated/model_evaluation/metrics_comparison_chart.png",
+    "generated/model_evaluation/roc_curve_comparison.png",
+    "generated/model_evaluation/best_model_comparison.png",
+    "generated/prediction_system/default_probability_profile.png",
+    "generated/model_evaluation/confusion_matrix_logistic_regression.png",
+    "generated/model_evaluation/confusion_matrix_decision_tree.png",
+    "generated/model_evaluation/confusion_matrix_random_forest.png",
+    "generated/model_evaluation/roc_curve_logistic_regression.png",
+    "generated/model_evaluation/roc_curve_decision_tree.png",
+    "generated/model_evaluation/roc_curve_random_forest.png"
+  ]
+}

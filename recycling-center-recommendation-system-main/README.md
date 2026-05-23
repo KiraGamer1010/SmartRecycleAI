@@ -330,6 +330,97 @@ Future work:
 - Route optimization for collection logistics.
 - Reinforcement learning for adaptive policy simulations.
 
+## R3 Supervised Model Engineering, Evaluation, and Prediction System
+
+The final CRISP-ML academic phases are implemented as supervised model workflows inside the same Flask application.
+
+### R3A2 Model Engineering
+
+The supervised training pipeline is implemented in:
+
+- `smartrecycleai/model_utils.py`
+- `smartrecycleai/model_training.py`
+- `smartrecycleai/prediction_service.py`
+
+The pipeline uses the existing processed feature matrix:
+
+- `datasets/processed/model_feature_matrix.csv`
+
+The target variable is:
+
+- `priority_class_id`
+
+The implemented supervised models are:
+
+- Logistic Regression.
+- Decision Tree.
+- Random Forest.
+
+Training uses `train_test_split` with `test_size=0.2`, stratified target classes, and `random_state=42`. Each model is stored as a reusable scikit-learn pipeline so preprocessing and prediction remain consistent.
+
+Generated model artifacts:
+
+- `models/logistic_regression.pkl`
+- `models/decision_tree.pkl`
+- `models/random_forest.pkl`
+- `models/best_model.pkl`
+- `models/model_manifest.json`
+
+Generated model engineering reports:
+
+- `reports/model_engineering/model_training_context.json`
+- `reports/model_engineering/prediction_examples.csv`
+- `static/generated/model_engineering/training_results_comparison.png`
+- `static/generated/model_engineering/prediction_distribution.png`
+- `static/generated/model_engineering/model_performance_summary.png`
+
+### R3A3 Model Evaluation
+
+The Model Evaluation page calculates test-set metrics only after the training split has been created. The page reports:
+
+- Accuracy.
+- Precision.
+- Recall.
+- F1-score.
+- Confusion matrix.
+- Multiclass One-vs-Rest ROC curves when predicted probabilities are available.
+- Best model selection explanation.
+
+Generated model evaluation reports:
+
+- `reports/model_evaluation/model_evaluation_results.json`
+- `reports/model_evaluation/model_metrics.csv`
+- `static/generated/model_evaluation/metrics_comparison_chart.png`
+- `static/generated/model_evaluation/best_model_comparison.png`
+- `static/generated/model_evaluation/roc_curve_comparison.png`
+- `static/generated/model_evaluation/confusion_matrix_logistic_regression.png`
+- `static/generated/model_evaluation/confusion_matrix_decision_tree.png`
+- `static/generated/model_evaluation/confusion_matrix_random_forest.png`
+- `static/generated/model_evaluation/roc_curve_logistic_regression.png`
+- `static/generated/model_evaluation/roc_curve_decision_tree.png`
+- `static/generated/model_evaluation/roc_curve_random_forest.png`
+
+### R3A4 Prediction System
+
+The Prediction System page loads `models/best_model.pkl` and validates user input through the same feature list used during training. It displays:
+
+- Input form with realistic default values.
+- Friendly validation messages.
+- Predicted priority class.
+- Prediction probabilities.
+- Confidence score.
+- Academic explanation of the prediction workflow.
+
+Generated prediction evidence:
+
+- `static/generated/prediction_system/default_probability_profile.png`
+
+The prediction system is available at:
+
+```text
+/prediction-system
+```
+
 ## Visual Analytics
 
 The application renders professional Matplotlib charts:
@@ -348,6 +439,12 @@ The application renders professional Matplotlib charts:
 - K-Means cluster scatter plot.
 - K-Means centroid heatmap.
 - Department-level cluster distribution.
+- Supervised model training comparison.
+- Supervised prediction distribution.
+- Model evaluation metrics comparison.
+- Confusion matrices for Logistic Regression, Decision Tree, and Random Forest.
+- Multiclass One-vs-Rest ROC curves.
+- Prediction probability profile.
 
 ## Screenshots
 
@@ -411,6 +508,8 @@ Generate processed datasets, charts, and reports:
 python createDataset\create_dataset.py
 ```
 
+This command also trains the supervised models, stores model artifacts, creates evaluation reports, and generates the R3 charts required for the Model Engineering, Model Evaluation, and Prediction System pages.
+
 Run Flask:
 
 ```powershell
@@ -446,6 +545,8 @@ The repository includes:
 - `.python-version`
 
 The Render build step generates the processed datasets, charts, and cached dashboard context before the web process starts. That keeps the first production request fast and avoids chart generation during page rendering when build artifacts already exist.
+
+The same build command also generates the supervised model artifacts required by the Prediction System. No additional heavy dependency is required beyond the existing scikit-learn stack.
 
 Deployment steps:
 
@@ -490,3 +591,23 @@ Validated project expectations:
 - Preprocessing script compatibility.
 - Render-ready WSGI entry point.
 - English user-facing templates, chart labels, and documentation.
+- R3A2 Model Engineering page with Logistic Regression, Decision Tree, and Random Forest.
+- R3A3 Model Evaluation page with comparative metrics, confusion matrices, ROC curves, and best model selection.
+- R3A4 Prediction System page with form input, validation, prediction result, probability display, and confidence score.
+
+## Final Teacher Checklist
+
+Before final submission, collect evidence for:
+
+- Business Understanding page.
+- Data Understanding page.
+- Data Engineering page.
+- Model Engineering page.
+- Model Evaluation page.
+- Prediction System page.
+- Public GitHub repository URL.
+- Public Render URL.
+- Final PDF report.
+- Screenshots of all required Flask pages.
+- Video presentation in English.
+- YouTube presentation link.

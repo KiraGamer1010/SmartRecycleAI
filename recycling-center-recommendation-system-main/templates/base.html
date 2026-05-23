@@ -21,7 +21,7 @@
             </button>
             <div class="nav-links" data-nav-links>
                 <a class="{{ 'active' if active_page == 'home' else '' }}" href="{{ url_for('main.home') }}"><i class="fa-solid fa-house"></i>Home</a>
-                <div class="nav-dropdown {{ 'active' if active_page in ['methodology', 'business', 'data_understanding', 'data_engineering', 'model_engineering', 'machine_learning', 'model_evaluation', 'model_deployment', 'monitoring'] else '' }}" data-phase-dropdown>
+                <div class="nav-dropdown {{ 'active' if active_page in ['methodology', 'business', 'data_understanding', 'data_engineering', 'model_engineering', 'machine_learning', 'model_evaluation', 'prediction_system', 'model_deployment', 'monitoring'] else '' }}" data-phase-dropdown>
                     <button class="dropdown-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
                         <i class="fa-solid fa-diagram-project"></i>
                         CRISP-ML Phases
@@ -33,8 +33,9 @@
                         <a class="{{ 'active' if active_page == 'data_understanding' else '' }}" href="{{ url_for('main.data_understanding') }}"><i class="fa-solid fa-chart-line"></i>Data Understanding</a>
                         <a class="{{ 'active' if active_page == 'data_engineering' else '' }}" href="{{ url_for('main.data_engineering') }}"><i class="fa-solid fa-gears"></i>Data Engineering</a>
                         <a class="{{ 'active' if active_page == 'model_engineering' else '' }}" href="{{ url_for('main.model_engineering') }}"><i class="fa-solid fa-brain"></i>Model Engineering</a>
-                        <a class="{{ 'active' if active_page == 'machine_learning' else '' }}" href="{{ url_for('main.kmeans_clustering') }}"><i class="fa-solid fa-circle-nodes"></i>K-Means Clustering</a>
                         <a class="{{ 'active' if active_page == 'model_evaluation' else '' }}" href="{{ url_for('main.model_evaluation') }}"><i class="fa-solid fa-gauge-high"></i>Model Evaluation</a>
+                        <a class="{{ 'active' if active_page == 'prediction_system' else '' }}" href="{{ url_for('main.prediction_system') }}"><i class="fa-solid fa-wand-magic-sparkles"></i>Prediction System</a>
+                        <a class="{{ 'active' if active_page == 'machine_learning' else '' }}" href="{{ url_for('main.kmeans_clustering') }}"><i class="fa-solid fa-circle-nodes"></i>K-Means Clustering</a>
                         <a class="{{ 'active' if active_page == 'model_deployment' else '' }}" href="{{ url_for('main.model_deployment') }}"><i class="fa-solid fa-cloud-arrow-up"></i>Model Deployment</a>
                         <a class="{{ 'active' if active_page == 'monitoring' else '' }}" href="{{ url_for('main.monitoring_maintenance') }}"><i class="fa-solid fa-satellite-dish"></i>Monitoring and Maintenance</a>
                     </div>

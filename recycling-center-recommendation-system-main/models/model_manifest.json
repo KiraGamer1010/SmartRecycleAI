@@ -1,0 +1,204 @@
+{
+  "trained_at": "2026-05-22T22:27:17+00:00",
+  "best_model_slug": "random_forest",
+  "best_model_name": "Random Forest",
+  "best_model_file": "best_model.pkl",
+  "feature_columns": [
+    "total_population",
+    "urbanization_ratio",
+    "population_density_per_km2",
+    "municipal_multidimensional_poverty_index",
+    "water_deprivation_percentage",
+    "waste_kg_per_capita_day",
+    "recyclable_kg_day",
+    "collection_coverage_percentage",
+    "collection_gap_percentage",
+    "collection_center_distance_km",
+    "existing_collection_centers",
+    "road_access_score",
+    "estimated_uncollected_recyclable_kg_day",
+    "center_capacity_pressure_score",
+    "eca_facility_count",
+    "active_eca_facility_count",
+    "operation_capacity_tons",
+    "storage_capacity_tons",
+    "total_hazardous_waste_kg_latest",
+    "department_population_growth_2018_2030_pct"
+  ],
+  "feature_summary": [
+    {
+      "column": "total_population",
+      "label": "Total population",
+      "minimum": 800,
+      "median": 14558.0,
+      "maximum": 11000000,
+      "default": 14558.0
+    },
+    {
+      "column": "urbanization_ratio",
+      "label": "Urbanization ratio",
+      "minimum": 0.109676,
+      "median": 0.602152,
+      "maximum": 0.989983,
+      "default": 0.602152
+    },
+    {
+      "column": "population_density_per_km2",
+      "label": "Population density",
+      "minimum": 0.09,
+      "median": 59.11,
+      "maximum": 106119.15,
+      "default": 59.11
+    },
+    {
+      "column": "municipal_multidimensional_poverty_index",
+      "label": "Poverty index",
+      "minimum": 4.5,
+      "median": 40.8,
+      "maximum": 98.5,
+      "default": 40.8
+    },
+    {
+      "column": "water_deprivation_percentage",
+      "label": "Water deprivation",
+      "minimum": 0.2,
+      "median": 21.4,
+      "maximum": 99.0,
+      "default": 21.4
+    },
+    {
+      "column": "waste_kg_per_capita_day",
+      "label": "Waste per capita",
+      "minimum": 0.3,
+      "median": 0.5905,
+      "maximum": 0.88,
+      "default": 0.5905
+    },
+    {
+      "column": "recyclable_kg_day",
+      "label": "Recyclable waste per day",
+      "minimum": 27.0,
+      "median": 1276.5,
+      "maximum": 1576179.0,
+      "default": 1276.5
+    },
+    {
+      "column": "collection_coverage_percentage",
+      "label": "Collection coverage",
+      "minimum": 10.0,
+      "median": 42.15,
+      "maximum": 91.6,
+      "default": 42.15
+    },
+    {
+      "column": "collection_gap_percentage",
+      "label": "Collection gap",
+      "minimum": 8.4,
+      "median": 57.85,
+      "maximum": 90.0,
+      "default": 57.85
+    },
+    {
+      "column": "collection_center_distance_km",
+      "label": "Distance to center",
+      "minimum": 4.21,
+      "median": 20.775,
+      "maximum": 49.78,
+      "default": 20.775
+    },
+    {
+      "column": "existing_collection_centers",
+      "label": "Existing centers",
+      "minimum": 0,
+      "median": 0.0,
+      "maximum": 19,
+      "default": 0.0
+    },
+    {
+      "column": "road_access_score",
+      "label": "Road access score",
+      "minimum": 1,
+      "median": 2.0,
+      "maximum": 3,
+      "default": 2.0
+    },
+    {
+      "column": "estimated_uncollected_recyclable_kg_day",
+      "label": "Uncollected recyclable waste",
+      "minimum": 13.95,
+      "median": 716.41,
+      "maximum": 641504.853,
+      "default": 716.41
+    },
+    {
+      "column": "center_capacity_pressure_score",
+      "label": "Center pressure",
+      "minimum": 27.0,
+      "median": 1172.5,
+      "maximum": 262696.5,
+      "default": 1172.5
+    },
+    {
+      "column": "eca_facility_count",
+      "label": "Registered facilities",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 3082.0,
+      "default": 0.0
+    },
+    {
+      "column": "active_eca_facility_count",
+      "label": "Active facilities",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 2280.0,
+      "default": 0.0
+    },
+    {
+      "column": "operation_capacity_tons",
+      "label": "Operation capacity",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 1326915.645,
+      "default": 0.0
+    },
+    {
+      "column": "storage_capacity_tons",
+      "label": "Storage capacity",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 5256248.77,
+      "default": 0.0
+    },
+    {
+      "column": "total_hazardous_waste_kg_latest",
+      "label": "Latest hazardous waste",
+      "minimum": 0.0,
+      "median": 0.0,
+      "maximum": 17556297.1,
+      "default": 0.0
+    },
+    {
+      "column": "department_population_growth_2018_2030_pct",
+      "label": "Department growth",
+      "minimum": 2.717234,
+      "median": 12.141894,
+      "maximum": 62.680359,
+      "default": 12.141894
+    }
+  ],
+  "class_labels": {
+    "0": "Not priority",
+    "1": "Priority",
+    "2": "High priority"
+  },
+  "class_order": [
+    0,
+    1,
+    2
+  ],
+  "target_column": "priority_class_id",
+  "target_label_column": "priority_label",
+  "test_size": 0.2,
+  "random_state": 42
+}

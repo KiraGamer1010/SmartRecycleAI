@@ -312,6 +312,8 @@ img {
 .dataset-card,
 .step-card,
 .text-panel,
+.alert-panel,
+.result-card,
 .chart-frame,
 .table-wrap,
 .timeline article,
@@ -542,6 +544,18 @@ img {
     margin-top: 12px;
     color: var(--muted);
     font-size: 0.92rem;
+}
+
+.chart-placeholder {
+    min-height: 300px;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.035);
 }
 
 .dataset-list {
@@ -797,6 +811,137 @@ tr:hover td {
     padding: 14px 16px;
 }
 
+.compact-section {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.alert-panel {
+    padding: 22px;
+    border-color: rgba(255, 107, 107, 0.38);
+    background: linear-gradient(180deg, rgba(255, 107, 107, 0.12), rgba(255, 255, 255, 0.035));
+}
+
+.alert-panel ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--ink);
+}
+
+.prediction-form {
+    width: min(100%, var(--max-width));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-field {
+    display: grid;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.form-field span {
+    color: var(--ink);
+    font-weight: 820;
+}
+
+.form-field small,
+.form-field em {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-style: normal;
+}
+
+.form-field input {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: rgba(4, 16, 15, 0.8);
+    color: var(--ink);
+    padding: 9px 11px;
+    font: inherit;
+}
+
+.form-field input:focus {
+    outline: 2px solid rgba(53, 213, 255, 0.35);
+    outline-offset: 2px;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.prediction-result {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    gap: 20px;
+}
+
+.result-card {
+    padding: 24px;
+}
+
+.result-card h2 {
+    margin: 0 0 12px;
+    color: var(--green);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.95;
+}
+
+.confidence-meter,
+.probability-track {
+    overflow: hidden;
+    height: 14px;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+}
+
+.confidence-meter span,
+.probability-track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    box-shadow: var(--glow);
+}
+
+.probability-list {
+    display: grid;
+    gap: 14px;
+}
+
+.probability-row {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.42fr) minmax(160px, 1fr) 72px;
+    gap: 12px;
+    align-items: center;
+}
+
+.probability-row strong {
+    color: var(--ink);
+}
+
+.probability-row em {
+    color: var(--cyan);
+    font-style: normal;
+    font-weight: 820;
+    text-align: right;
+}
+
 .site-footer {
     display: flex;
     justify-content: space-between;
@@ -832,6 +977,8 @@ tr:hover td {
     .pipeline-flow,
     .step-grid,
     .stats-row,
+    .form-grid,
+    .prediction-result,
     .download-grid,
     .reference-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -908,6 +1055,9 @@ tr:hover td {
     .step-grid,
     .stats-row,
     .profile-grid,
+    .form-grid,
+    .prediction-result,
+    .probability-row,
     .download-grid,
     .reference-list {
         grid-template-columns: 1fr;

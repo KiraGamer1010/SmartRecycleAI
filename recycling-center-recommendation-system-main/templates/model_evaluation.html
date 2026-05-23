@@ -2,118 +2,230 @@
 
 {% block content %}
 <section class="page-hero">
-    <p class="eyebrow">CRISP-ML lifecycle</p>
-    <h1>Model Evaluation</h1>
+    <p class="eyebrow">R3A3 Speaking Models / Model Evaluation</p>
+    <h1>Model Evaluation Dashboard</h1>
     <p>
-        Model evaluation verifies whether SmartRecycleAI recommendations are accurate, stable, interpretable,
-        and useful for real recycling infrastructure planning before any operational deployment.
+        This page evaluates Logistic Regression, Decision Tree, and Random Forest on the held-out test dataset.
+        It compares accuracy, precision, recall, F1-score, confusion matrices, and multiclass One-vs-Rest ROC
+        curves to select the best model for the Prediction System.
     </p>
+</section>
+
+{% if not supervised_modeling.available %}
+<section class="section">
+    <div class="text-panel alert-panel">
+        <p class="eyebrow">Evaluation unavailable</p>
+        <h2>The evaluation artifacts could not be loaded</h2>
+        <p>{{ supervised_modeling.error }}</p>
+    </div>
+</section>
+{% else %}
+
+<section class="section stats-row">
+    <article>
+        <span>{{ supervised_modeling.best_model.metrics.accuracy|decimal }}</span>
+        <p>Best accuracy</p>
+    </article>
+    <article>
+        <span>{{ supervised_modeling.best_model.metrics.precision|decimal }}</span>
+        <p>Best precision</p>
+    </article>
+    <article>
+        <span>{{ supervised_modeling.best_model.metrics.recall|decimal }}</span>
+        <p>Best recall</p>
+    </article>
+    <article>
+        <span>{{ supervised_modeling.best_model.metrics.f1_score|decimal }}</span>
+        <p>Best F1-score</p>
+    </article>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <p class="eyebrow">Selected model</p>
+        <h2>{{ supervised_modeling.best_model.display_name }}</h2>
+        <p>{{ supervised_modeling.best_model.explanation }}</p>
+        <p>
+            Selection rule: {{ supervised_modeling.best_model.selection_metric }} This prioritizes balanced
+            classification quality over a single raw accuracy value.
+        </p>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Comparative metrics</p>
+        <h2>Accuracy, precision, recall, and F1-score</h2>
+    </div>
+    <div class="grid two">
+        {% set evaluation_charts = supervised_modeling.charts.model_evaluation %}
+        <figure class="chart-frame">
+            {% if evaluation_charts.metrics_comparison %}
+            <img src="{{ url_for('static', filename=evaluation_charts.metrics_comparison) }}" alt="Model metrics comparison chart">
+            {% else %}
+            <div class="chart-placeholder">Metrics comparison chart is not available.</div>
+            {% endif %}
+            <figcaption>Comparison chart generated automatically from test-set evaluation results.</figcaption>
+        </figure>
+        <figure class="chart-frame">
+            {% if evaluation_charts.best_model_comparison %}
+            <img src="{{ url_for('static', filename=evaluation_charts.best_model_comparison) }}" alt="Best model comparison chart">
+            {% else %}
+            <div class="chart-placeholder">Best model chart is not available.</div>
+            {% endif %}
+            <figcaption>Focused view of the selected model metrics for screenshot-ready evidence.</figcaption>
+        </figure>
+    </div>
 </section>
 
 <section class="section">
     <div class="section-heading">
-        <p class="eyebrow">Evaluation framework</p>
-        <h2>Technical quality and decision relevance</h2>
+        <p class="eyebrow">Evaluation table</p>
+        <h2>Reusable metrics report</h2>
         <p>
-            A model is valuable only if it generalizes beyond the training data and produces recommendations that
-            domain specialists can trust. Evaluation combines quantitative metrics, validation strategy, risk
-            analysis, and expert review.
+            Precision, recall, and F1-score use a weighted average so the scores respect the class distribution
+            of the municipal priority target.
         </p>
-    </div>
-    <div class="grid two">
-        <article class="info-card">
-            <h3><i class="fa-solid fa-gauge-high"></i> Performance Metrics</h3>
-            <p>
-                For classification, SmartRecycleAI can evaluate Accuracy, Precision, Recall, and F1-score. If a
-                regression target is used, RMSE can measure prediction error. Recommendation relevance, coverage,
-                and interpretability should also be tracked because the platform supports planning decisions.
-            </p>
-        </article>
-        <article class="info-card">
-            <h3><i class="fa-solid fa-layer-group"></i> Cross Validation</h3>
-            <p>
-                Cross validation evaluates generalization by training and testing the model across different data
-                subsets. This helps detect whether results depend on one split and whether performance is consistent
-                across municipalities with different population, access, and infrastructure profiles.
-            </p>
-        </article>
-        <article class="info-card">
-            <h3><i class="fa-solid fa-triangle-exclamation"></i> Risk Analysis</h3>
-            <p>
-                Evaluation must identify overfitting, underfitting, class imbalance, biased recommendations, weak
-                regional generalization, and unstable performance on municipalities with limited facility or
-                hazardous waste evidence.
-            </p>
-        </article>
-        <article class="info-card">
-            <h3><i class="fa-solid fa-user-check"></i> Expert Review</h3>
-            <p>
-                Environmental planners, recycling operators, and municipal specialists should review whether model
-                outputs are practically relevant. Expert review checks whether high-priority recommendations align
-                with local conditions, policy constraints, and operational feasibility.
-            </p>
-        </article>
-    </div>
-</section>
-
-<section class="section muted">
-    <div class="section-heading">
-        <p class="eyebrow">Implemented clustering metrics</p>
-        <h2>K-Means evaluation evidence</h2>
-        <p>
-            The current implemented model is unsupervised, so the platform evaluates clustering quality with
-            internal validation metrics generated from the fitted standardized feature matrix.
-        </p>
-    </div>
-    <div class="grid four">
-        {% for metric in kmeans_analysis.evaluation_metrics %}
-        <article class="metric-card">
-            <span>{{ metric.value|decimal }}</span>
-            <h3>{{ metric.metric }}</h3>
-            <p>{{ metric.meaning }}</p>
-            <strong>{{ metric.direction }}</strong>
-        </article>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="section muted">
-    <div class="section-heading">
-        <p class="eyebrow">Metric map</p>
-        <h2>How metrics align with SmartRecycleAI use cases</h2>
     </div>
     <div class="table-wrap">
         <table>
             <thead>
                 <tr>
-                    <th>Use Case</th>
-                    <th>Possible Metrics</th>
-                    <th>Evaluation Purpose</th>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1-Score</th>
+                    <th>ROC AUC OvR</th>
                 </tr>
             </thead>
             <tbody>
+                {% for row in supervised_modeling.metric_rows %}
                 <tr>
-                    <td>Priority classification</td>
-                    <td>Accuracy, Precision, Recall, F1-score</td>
-                    <td>Verify whether municipalities are assigned to the correct priority class.</td>
+                    <td>{{ row.model }}</td>
+                    <td>{{ row.accuracy|decimal }}</td>
+                    <td>{{ row.precision|decimal }}</td>
+                    <td>{{ row.recall|decimal }}</td>
+                    <td>{{ row.f1_score|decimal }}</td>
+                    <td>{{ row.roc_auc_ovr if row.roc_auc_ovr != "" else "Not available" }}</td>
                 </tr>
-                <tr>
-                    <td>Recycling potential estimation</td>
-                    <td>RMSE, mean absolute error, residual analysis</td>
-                    <td>Measure numerical prediction error for continuous planning indicators.</td>
-                </tr>
-                <tr>
-                    <td>Recommendation ranking</td>
-                    <td>Recommendation relevance, Coverage, stability</td>
-                    <td>Assess whether the ranked outputs surface useful municipalities for intervention.</td>
-                </tr>
-                <tr>
-                    <td>Operational decision support</td>
-                    <td>Interpretability, expert acceptance, error severity</td>
-                    <td>Ensure model outputs remain explainable and actionable for institutional users.</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
 </section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Confusion matrices</p>
+        <h2>Class-level prediction behavior</h2>
+        <p>
+            Confusion matrices show how many municipalities from each actual priority class were assigned to each
+            predicted class. They help explain errors beyond a single score.
+        </p>
+    </div>
+    <div class="grid three">
+        {% for model in supervised_modeling.models %}
+        <figure class="chart-frame">
+            {% if model.chart_paths.confusion_matrix %}
+            <img src="{{ url_for('static', filename=model.chart_paths.confusion_matrix) }}" alt="{{ model.display_name }} confusion matrix">
+            {% else %}
+            <div class="chart-placeholder">{{ model.display_name }} confusion matrix is not available.</div>
+            {% endif %}
+            <figcaption>{{ model.display_name }} confusion matrix on test data.</figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">ROC curves</p>
+        <h2>Multiclass One-vs-Rest evaluation</h2>
+        <p>{{ supervised_modeling.roc_strategy }}</p>
+    </div>
+    <div class="grid two">
+        <figure class="chart-frame">
+            {% if evaluation_charts.roc_curve_comparison %}
+            <img src="{{ url_for('static', filename=evaluation_charts.roc_curve_comparison) }}" alt="ROC curve comparison chart">
+            {% else %}
+            <div class="chart-placeholder">ROC comparison chart is not available.</div>
+            {% endif %}
+            <figcaption>Micro-averaged One-vs-Rest ROC comparison across the three classifiers.</figcaption>
+        </figure>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>ROC chart</th>
+                        <th>Academic interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model in supervised_modeling.models %}
+                    <tr>
+                        <td>{{ model.display_name }}</td>
+                        <td>{{ "Generated" if model.chart_paths.roc_curve else "Not available" }}</td>
+                        <td>
+                            The ROC result complements accuracy by evaluating how well the model separates each
+                            priority class against the remaining classes.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Individual ROC evidence</p>
+        <h2>Model-specific ROC curves</h2>
+    </div>
+    <div class="grid three">
+        {% for model in supervised_modeling.models %}
+        <figure class="chart-frame">
+            {% if model.chart_paths.roc_curve %}
+            <img src="{{ url_for('static', filename=model.chart_paths.roc_curve) }}" alt="{{ model.display_name }} ROC curve">
+            {% else %}
+            <div class="chart-placeholder">{{ model.display_name }} ROC curve is not available.</div>
+            {% endif %}
+            <figcaption>{{ model.display_name }} class-by-class One-vs-Rest ROC curve.</figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <article class="text-panel">
+            <p class="eyebrow">Performance analysis</p>
+            <h2>Academic interpretation</h2>
+            <p>
+                Accuracy describes the global share of correct predictions, while precision and recall show how
+                reliable the model is when assigning each priority class. F1-score balances precision and recall,
+                making it a strong selection metric for an imbalanced municipal planning target.
+            </p>
+            <p>
+                Confusion matrices should be reviewed before field use because a false low-priority assignment can
+                delay infrastructure attention. The selected model should support expert review, not replace it.
+            </p>
+        </article>
+        <article class="text-panel">
+            <p class="eyebrow">Reusable evidence</p>
+            <h2>Stored evaluation files</h2>
+            <p>
+                Metrics are saved in `reports/model_evaluation/model_metrics.csv`, full evaluation context is saved
+                as JSON, and all charts are stored under `static/generated/model_evaluation`.
+            </p>
+            <p>
+                This structure keeps the evaluation reusable for screenshots, PDF reporting, Render deployment, and
+                future model comparison.
+            </p>
+        </article>
+    </div>
+</section>
+{% endif %}
 {% endblock %}

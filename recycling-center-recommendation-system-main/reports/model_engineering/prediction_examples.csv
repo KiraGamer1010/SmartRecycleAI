@@ -1,0 +1,37 @@
+model,municipality_code,municipality_name,actual_class,predicted_class,confidence
+Logistic Regression,41872,VILLAVIEJA,Not priority,Priority,0.5643
+Logistic Regression,8433,MALAMBO,Not priority,Not priority,0.7984
+Logistic Regression,54250,EL TARRA,High priority,High priority,0.9986
+Logistic Regression,94884,PUERTO COLOMBIA,High priority,High priority,1.0
+Logistic Regression,5887,YARUMAL,Priority,Priority,0.6745
+Logistic Regression,73555,PLANADAS,High priority,High priority,0.873
+Logistic Regression,15696,SANTA SOFÍA,Not priority,Priority,0.5615
+Logistic Regression,70124,CAIMITO,High priority,High priority,0.9229
+Logistic Regression,66318,GUÁTICA,Not priority,Not priority,0.7269
+Logistic Regression,85410,TAURAMENA,Not priority,Not priority,0.8197
+Logistic Regression,68684,SAN JOSÉ DE MIRANDA,Priority,Priority,0.5832
+Logistic Regression,19809,TIMBIQUÍ,High priority,High priority,0.952
+Decision Tree,41872,VILLAVIEJA,Not priority,Not priority,1.0
+Decision Tree,8433,MALAMBO,Not priority,Priority,0.8967
+Decision Tree,54250,EL TARRA,High priority,High priority,1.0
+Decision Tree,94884,PUERTO COLOMBIA,High priority,High priority,1.0
+Decision Tree,5887,YARUMAL,Priority,Priority,0.8967
+Decision Tree,73555,PLANADAS,High priority,High priority,1.0
+Decision Tree,15696,SANTA SOFÍA,Not priority,Priority,0.5008
+Decision Tree,70124,CAIMITO,High priority,High priority,1.0
+Decision Tree,66318,GUÁTICA,Not priority,Not priority,1.0
+Decision Tree,85410,TAURAMENA,Not priority,Not priority,1.0
+Decision Tree,68684,SAN JOSÉ DE MIRANDA,Priority,Priority,1.0
+Decision Tree,19809,TIMBIQUÍ,High priority,High priority,1.0
+Random Forest,41872,VILLAVIEJA,Not priority,Not priority,0.6405
+Random Forest,8433,MALAMBO,Not priority,Not priority,0.8979
+Random Forest,54250,EL TARRA,High priority,High priority,0.9975
+Random Forest,94884,PUERTO COLOMBIA,High priority,High priority,0.9965
+Random Forest,5887,YARUMAL,Priority,Priority,0.8142
+Random Forest,73555,PLANADAS,High priority,High priority,0.9706
+Random Forest,15696,SANTA SOFÍA,Not priority,Not priority,0.6205
+Random Forest,70124,CAIMITO,High priority,High priority,0.8715
+Random Forest,66318,GUÁTICA,Not priority,Not priority,0.9224
+Random Forest,85410,TAURAMENA,Not priority,Not priority,0.8346
+Random Forest,68684,SAN JOSÉ DE MIRANDA,Priority,Priority,0.6784
+Random Forest,19809,TIMBIQUÍ,High priority,High priority,0.9391
