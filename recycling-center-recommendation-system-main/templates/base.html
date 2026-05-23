@@ -21,13 +21,14 @@
             </button>
             <div class="nav-links" data-nav-links>
                 <a class="{{ 'active' if active_page == 'home' else '' }}" href="{{ url_for('main.home') }}"><i class="fa-solid fa-house"></i>Home</a>
-                <div class="nav-dropdown {{ 'active' if active_page in ['methodology', 'business', 'data_understanding', 'data_engineering', 'model_engineering', 'machine_learning', 'model_evaluation', 'prediction_system', 'model_deployment', 'monitoring'] else '' }}" data-phase-dropdown>
+                <div class="nav-dropdown {{ 'active' if active_page in ['methodology', 'business', 'data_understanding', 'data_engineering', 'model_engineering', 'model_evaluation', 'prediction_system'] else '' }}" data-nav-dropdown>
                     <button class="dropdown-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
                         <i class="fa-solid fa-diagram-project"></i>
-                        CRISP-ML Phases
+                        CRISP-ML Rubric
                         <i class="fa-solid fa-chevron-down"></i>
                     </button>
                     <div class="dropdown-menu" data-dropdown-menu>
+                        <span class="dropdown-label">Required academic hierarchy</span>
                         <a class="{{ 'active' if active_page == 'methodology' else '' }}" href="{{ url_for('main.methodology') }}"><i class="fa-solid fa-route"></i>CRISP-ML Methodology</a>
                         <a class="{{ 'active' if active_page == 'business' else '' }}" href="{{ url_for('main.business_understanding') }}"><i class="fa-solid fa-bullseye"></i>Business Understanding</a>
                         <a class="{{ 'active' if active_page == 'data_understanding' else '' }}" href="{{ url_for('main.data_understanding') }}"><i class="fa-solid fa-chart-line"></i>Data Understanding</a>
@@ -35,15 +36,25 @@
                         <a class="{{ 'active' if active_page == 'model_engineering' else '' }}" href="{{ url_for('main.model_engineering') }}"><i class="fa-solid fa-brain"></i>Model Engineering</a>
                         <a class="{{ 'active' if active_page == 'model_evaluation' else '' }}" href="{{ url_for('main.model_evaluation') }}"><i class="fa-solid fa-gauge-high"></i>Model Evaluation</a>
                         <a class="{{ 'active' if active_page == 'prediction_system' else '' }}" href="{{ url_for('main.prediction_system') }}"><i class="fa-solid fa-wand-magic-sparkles"></i>Prediction System</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown {{ 'active' if active_page in ['dataset_analysis', 'data_pipeline', 'machine_learning', 'model_deployment', 'monitoring', 'conclusions', 'about'] else '' }}" data-nav-dropdown>
+                    <button class="dropdown-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
+                        <i class="fa-solid fa-folder-tree"></i>
+                        Project Evidence
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" data-dropdown-menu>
+                        <span class="dropdown-label">Supporting pages and artifacts</span>
+                        <a class="{{ 'active' if active_page == 'dataset_analysis' else '' }}" href="{{ url_for('main.dataset_analysis') }}"><i class="fa-solid fa-table"></i>Dataset Analysis</a>
+                        <a class="{{ 'active' if active_page == 'data_pipeline' else '' }}" href="{{ url_for('main.data_pipeline') }}"><i class="fa-solid fa-code-branch"></i>Data Pipeline</a>
                         <a class="{{ 'active' if active_page == 'machine_learning' else '' }}" href="{{ url_for('main.kmeans_clustering') }}"><i class="fa-solid fa-circle-nodes"></i>K-Means Clustering</a>
                         <a class="{{ 'active' if active_page == 'model_deployment' else '' }}" href="{{ url_for('main.model_deployment') }}"><i class="fa-solid fa-cloud-arrow-up"></i>Model Deployment</a>
                         <a class="{{ 'active' if active_page == 'monitoring' else '' }}" href="{{ url_for('main.monitoring_maintenance') }}"><i class="fa-solid fa-satellite-dish"></i>Monitoring and Maintenance</a>
+                        <a class="{{ 'active' if active_page == 'conclusions' else '' }}" href="{{ url_for('main.conclusions') }}"><i class="fa-solid fa-check-double"></i>Conclusions</a>
+                        <a class="{{ 'active' if active_page == 'about' else '' }}" href="{{ url_for('main.about_project') }}"><i class="fa-solid fa-circle-info"></i>About Project</a>
                     </div>
                 </div>
-                <a class="{{ 'active' if active_page == 'dataset_analysis' else '' }}" href="{{ url_for('main.dataset_analysis') }}"><i class="fa-solid fa-table"></i>Dataset Analysis</a>
-                <a class="{{ 'active' if active_page == 'data_pipeline' else '' }}" href="{{ url_for('main.data_pipeline') }}"><i class="fa-solid fa-code-branch"></i>Data Pipeline</a>
-                <a class="{{ 'active' if active_page == 'conclusions' else '' }}" href="{{ url_for('main.conclusions') }}"><i class="fa-solid fa-check-double"></i>Conclusions</a>
-                <a class="{{ 'active' if active_page == 'about' else '' }}" href="{{ url_for('main.about_project') }}"><i class="fa-solid fa-circle-info"></i>About Project</a>
             </div>
         </nav>
     </header>
@@ -67,12 +78,24 @@
             toggle.addEventListener("click", () => links.classList.toggle("open"));
         }
 
-        const dropdown = document.querySelector("[data-phase-dropdown]");
-        const dropdownTrigger = document.querySelector("[data-dropdown-trigger]");
-        if (dropdown && dropdownTrigger) {
+        const dropdowns = document.querySelectorAll("[data-nav-dropdown]");
+        dropdowns.forEach((dropdown) => {
+            const dropdownTrigger = dropdown.querySelector("[data-dropdown-trigger]");
+            if (!dropdownTrigger) {
+                return;
+            }
             dropdownTrigger.addEventListener("click", () => {
                 const isOpen = dropdown.classList.toggle("open");
                 dropdownTrigger.setAttribute("aria-expanded", String(isOpen));
+                dropdowns.forEach((otherDropdown) => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove("open");
+                        const otherTrigger = otherDropdown.querySelector("[data-dropdown-trigger]");
+                        if (otherTrigger) {
+                            otherTrigger.setAttribute("aria-expanded", "false");
+                        }
+                    }
+                });
             });
             document.addEventListener("click", (event) => {
                 if (!dropdown.contains(event.target)) {
@@ -80,7 +103,7 @@
                     dropdownTrigger.setAttribute("aria-expanded", "false");
                 }
             });
-        }
+        });
 
         const revealItems = document.querySelectorAll(".section, .page-hero, .hero-band");
         if ("IntersectionObserver" in window) {

@@ -204,6 +204,15 @@ img {
     min-height: 42px;
 }
 
+.dropdown-label {
+    padding: 6px 10px 2px;
+    color: var(--cyan);
+    font-size: 0.72rem;
+    font-weight: 860;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .menu-toggle {
     display: none;
     width: 42px;
@@ -597,12 +606,272 @@ img {
     font-weight: 870;
 }
 
+.rubric-anchor-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(49, 209, 123, 0.1), rgba(76, 131, 255, 0.08));
+    box-shadow: var(--shadow);
+}
+
+.rubric-anchor-bar a,
+.rubric-sidebar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 11px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.045);
+    font-size: 0.86rem;
+    font-weight: 780;
+    transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.rubric-anchor-bar a:hover,
+.rubric-sidebar a:hover {
+    color: var(--ink);
+    border-color: var(--line-strong);
+    background: rgba(53, 213, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.academic-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.26fr) minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.rubric-sidebar {
+    position: sticky;
+    top: 94px;
+    display: grid;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(9, 28, 26, 0.86);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+}
+
+.rubric-sidebar a {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.rubric-main {
+    display: grid;
+    gap: 24px;
+    min-width: 0;
+}
+
+.rubric-section {
+    scroll-margin-top: 112px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+}
+
+.rubric-section-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.rubric-section-header h2 {
+    margin: 0;
+    font-size: clamp(1.45rem, 3vw, 2.15rem);
+    line-height: 1.1;
+}
+
+.rubric-section p {
+    color: var(--muted);
+}
+
+.rubric-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    max-width: 260px;
+    padding: 7px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--ink);
+    background: rgba(53, 213, 255, 0.1);
+    font-size: 0.78rem;
+    font-weight: 840;
+    text-align: center;
+}
+
+.rubric-mini-grid,
+.metric-dashboard,
+.model-summary-strip {
+    display: grid;
+    gap: 14px;
+}
+
+.rubric-mini-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 18px;
+}
+
+.rubric-mini-grid article,
+.rubric-subsection,
+.model-summary-strip article,
+.confidence-card,
+.empty-state-panel,
+.probability-panel {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.052);
+}
+
+.rubric-mini-grid article,
+.rubric-subsection,
+.model-summary-strip article,
+.confidence-card {
+    padding: 18px;
+}
+
+.rubric-mini-grid h3,
+.rubric-subsection h3,
+.text-panel h3 {
+    margin: 0 0 10px;
+    color: var(--ink);
+    font-size: 1rem;
+}
+
+.rubric-subsection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.rubric-subsection-wide {
+    grid-column: 1 / -1;
+}
+
+.model-rubric-card {
+    border-color: rgba(53, 213, 255, 0.26);
+    background:
+        linear-gradient(90deg, rgba(49, 209, 123, 0.08), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+}
+
+.model-summary-strip,
+.metric-dashboard {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 18px;
+}
+
+.metric-dashboard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 18px;
+}
+
+.model-summary-strip article span,
+.confidence-card span {
+    display: block;
+    color: var(--green);
+    font-size: clamp(1.55rem, 4vw, 2.5rem);
+    line-height: 1;
+    font-weight: 880;
+}
+
+.model-summary-strip article p,
+.confidence-card p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-weight: 720;
+}
+
+.metric-section {
+    background:
+        linear-gradient(135deg, rgba(53, 213, 255, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+}
+
+.chart-gallery {
+    margin-top: 18px;
+}
+
+.small-chart img,
+.small-chart .chart-placeholder {
+    min-height: 230px;
+}
+
+.best-model-panel {
+    border-color: rgba(200, 242, 109, 0.28);
+    background:
+        linear-gradient(135deg, rgba(200, 242, 109, 0.1), transparent 35%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03));
+}
+
+.prediction-layout .rubric-section {
+    scroll-margin-top: 112px;
+}
+
+.result-card-highlight {
+    border-color: rgba(49, 209, 123, 0.36);
+    background:
+        linear-gradient(135deg, rgba(49, 209, 123, 0.15), rgba(53, 213, 255, 0.08)),
+        rgba(255, 255, 255, 0.05);
+}
+
+.result-card h3 {
+    margin: 0 0 12px;
+    color: var(--green);
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 0.95;
+}
+
+.confidence-card {
+    background:
+        linear-gradient(135deg, rgba(49, 209, 123, 0.14), rgba(76, 131, 255, 0.08)),
+        rgba(255, 255, 255, 0.04);
+}
+
+.confidence-card .confidence-meter {
+    margin-top: 18px;
+}
+
+.probability-panel {
+    padding: 18px;
+}
+
+.visual-note {
+    margin: 14px 0 0;
+}
+
 .table-wrap {
     overflow-x: auto;
 }
 
 .table-wrap.wide table {
     min-width: 980px;
+}
+
+.compact-table {
+    overflow-x: auto;
+}
+
+.compact-table table {
+    min-width: 420px;
 }
 
 table {
@@ -969,7 +1238,9 @@ tr:hover td {
     .grid.three,
     .grid.four,
     .lifecycle-map,
-    .dataset-card {
+    .dataset-card,
+    .academic-layout,
+    .rubric-subsection-grid {
         grid-template-columns: 1fr;
     }
 
@@ -980,8 +1251,15 @@ tr:hover td {
     .form-grid,
     .prediction-result,
     .download-grid,
-    .reference-list {
+    .reference-list,
+    .rubric-mini-grid,
+    .model-summary-strip,
+    .metric-dashboard {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .rubric-sidebar {
+        position: static;
     }
 }
 
@@ -1059,8 +1337,32 @@ tr:hover td {
     .prediction-result,
     .probability-row,
     .download-grid,
-    .reference-list {
+    .reference-list,
+    .rubric-mini-grid,
+    .model-summary-strip,
+    .metric-dashboard {
         grid-template-columns: 1fr;
+    }
+
+    .rubric-anchor-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .rubric-anchor-bar a {
+        white-space: nowrap;
+    }
+
+    .rubric-section,
+    .rubric-subsection,
+    .rubric-mini-grid article,
+    .confidence-card {
+        padding: 16px;
+    }
+
+    .rubric-section-header {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .hero-content h1,
