@@ -5,9 +5,10 @@
     <p class="eyebrow">R3A2 Model Engineering</p>
     <h1>Supervised Model Engineering</h1>
     <p>
-        This page organizes the supervised training phase exactly by the academic rubric. Each model is separated
-        into Dataset Split, Training Process, Hyperparameters, Validation, Predictions, Code Explanation, Graphs,
-        and Results so the teacher can verify the CRISP-ML hierarchy visually.
+        This Render-safe page organizes the supervised training phase exactly by the teacher's rubric. The
+        Model Development section contains Logistic Regression, Decision Tree, and Random Forest with Dataset Split,
+        Training Process, Hyperparameter Configuration, Validation Process, Prediction Generation, Code Explanation,
+        Training Screenshots, Graphical Visualizations, and Model Summaries.
     </p>
 </section>
 
@@ -17,7 +18,15 @@
         <p class="eyebrow">Model artifacts unavailable</p>
         <h2>The supervised training report could not be loaded</h2>
         <p>{{ supervised_modeling.error }}</p>
-        <p>Run the data and model generation command again before reviewing this page.</p>
+        {% if supervised_modeling.missing_artifacts %}
+        <p>The following required Render artifacts are missing:</p>
+        <ul>
+            {% for item in supervised_modeling.missing_artifacts %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p>{{ supervised_modeling.render_guidance or "Run python createDataset/create_dataset.py before reviewing this page." }}</p>
     </div>
 </section>
 {% else %}
@@ -26,10 +35,11 @@
 
 <section class="section">
     <nav class="rubric-anchor-bar" aria-label="Model Engineering academic submenu">
-        <a href="#model-engineering-overview"><i class="fa-solid fa-sitemap"></i>Overview</a>
+        <a href="#model-development"><i class="fa-solid fa-sitemap"></i>Model Development</a>
         <a href="#logistic-regression"><i class="fa-solid fa-chart-simple"></i>Logistic Regression</a>
         <a href="#decision-tree"><i class="fa-solid fa-diagram-project"></i>Decision Tree</a>
         <a href="#random-forest"><i class="fa-solid fa-tree"></i>Random Forest</a>
+        <a href="#flask-integration"><i class="fa-solid fa-window-maximize"></i>Flask Integration</a>
         <a href="#model-engineering-artifacts"><i class="fa-solid fa-box-archive"></i>Artifacts</a>
     </nav>
 </section>
@@ -82,25 +92,27 @@
 <section class="section academic-layout">
     <aside class="rubric-sidebar" aria-label="Model Engineering section navigator">
         <p class="eyebrow">Internal academic submenu</p>
-        <a href="#model-engineering-overview">Model Engineering Overview</a>
+        <a href="#model-development">Model Development</a>
         {% for model in supervised_modeling.models %}
         <a href="#{{ model.slug|replace('_', '-') }}">{{ model.display_name }}</a>
         {% endfor %}
+        <a href="#flask-integration">Flask Integration</a>
         <a href="#model-engineering-artifacts">Artifacts and Best Model</a>
     </aside>
 
     <div class="rubric-main">
-        <article id="model-engineering-overview" class="rubric-section">
+        <article id="model-development" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
                     <p class="eyebrow">Academic rubric overview</p>
-                    <h2>Model Engineering Structure</h2>
+                    <h2>Model Development</h2>
                 </div>
                 <span class="rubric-badge">R3A2</span>
             </div>
             <p>
-                SmartRecycleAI trains Logistic Regression, Decision Tree, and Random Forest using the prepared
-                municipal feature matrix. The target variable is
+                The Model Development section contains the three required Machine Learning models:
+                <strong>Logistic Regression</strong>, <strong>Decision Tree</strong>, and
+                <strong>Random Forest</strong>. All models use the prepared municipal feature matrix. The target variable is
                 <strong>{{ supervised_modeling.dataset_split.target_column }}</strong>, described as
                 {{ supervised_modeling.dataset_split.target_description }}.
             </p>
@@ -136,7 +148,7 @@
                     <p class="eyebrow">Screenshot-ready visual evidence</p>
                     <h2>Model Engineering Graphs</h2>
                 </div>
-                <span class="rubric-badge">Graphs</span>
+                <span class="rubric-badge">Graphical Visualizations</span>
             </div>
             <div class="grid three">
                 <figure class="chart-frame">
@@ -216,7 +228,7 @@
                 </section>
 
                 <section class="rubric-subsection">
-                    <h3>Hyperparameters</h3>
+                    <h3>Hyperparameter Configuration</h3>
                     <div class="compact-table">
                         <table>
                             <thead>
@@ -238,7 +250,7 @@
                 </section>
 
                 <section class="rubric-subsection">
-                    <h3>Validation</h3>
+                    <h3>Validation Process</h3>
                     <p>
                         Validation is performed on the held-out test split only. The reported weighted scores
                         evaluate how reliably the model assigns each municipality priority class.
@@ -256,7 +268,7 @@
                 </section>
 
                 <section class="rubric-subsection">
-                    <h3>Predictions</h3>
+                    <h3>Prediction Generation</h3>
                     <p>
                         Prediction examples are generated from test-set records and stored in
                         <strong>reports/model_engineering/prediction_examples.csv</strong>.
@@ -303,8 +315,19 @@
                     </p>
                 </section>
 
+                <section class="rubric-subsection">
+                    <h3>Training Screenshots</h3>
+                    <div class="chart-placeholder screenshot-placeholder">
+                        Screenshot evidence must be captured from the running Flask application.
+                    </div>
+                    <p>
+                        This placeholder is intentional. The repository does not invent fake screenshots; the final
+                        PDF should capture the live Model Engineering page, training charts, and comparison tables.
+                    </p>
+                </section>
+
                 <section class="rubric-subsection rubric-subsection-wide">
-                    <h3>Graphs</h3>
+                    <h3>Graphical Visualizations</h3>
                     <div class="grid two">
                         <figure class="chart-frame small-chart">
                             {% if model.chart_paths.confusion_matrix %}
@@ -326,7 +349,7 @@
                 </section>
 
                 <section class="rubric-subsection">
-                    <h3>Results</h3>
+                    <h3>Model Summaries</h3>
                     <p>
                         The model reached <strong>{{ model.metrics.accuracy|decimal }}</strong> accuracy and
                         <strong>{{ model.metrics.f1_score|decimal }}</strong> weighted F1-score on the test set.
@@ -361,6 +384,88 @@
             </div>
         </article>
         {% endfor %}
+
+        <article id="flask-integration" class="rubric-section">
+            <div class="rubric-section-header">
+                <div>
+                    <p class="eyebrow">Required implementation evidence</p>
+                    <h2>Flask Integration</h2>
+                </div>
+                <span class="rubric-badge">Render-safe page context</span>
+            </div>
+            <div class="rubric-subsection-grid">
+                <section class="rubric-subsection">
+                    <h3>Model explanation</h3>
+                    <p>
+                        The Flask route loads the generated supervised modeling context and renders explanations for
+                        Logistic Regression, Decision Tree, and Random Forest directly from the reusable training report.
+                    </p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Training process</h3>
+                    <p>
+                        The build command can regenerate the data pipeline, fitted model artifacts, evaluation JSON,
+                        CSV reports, and static charts before the Render web service starts.
+                    </p>
+                </section>
+                <section class="rubric-subsection rubric-subsection-wide">
+                    <h3>Console prediction examples</h3>
+                    <div class="table-wrap wide">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Municipality</th>
+                                    <th>Actual class</th>
+                                    <th>Predicted class</th>
+                                    <th>Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in supervised_modeling.prediction_examples %}
+                                <tr>
+                                    <td>{{ row.model }}</td>
+                                    <td>{{ row.municipality_name }}</td>
+                                    <td>{{ row.actual_class }}</td>
+                                    <td>{{ row.predicted_class }}</td>
+                                    <td>{{ row.confidence|decimal if row.confidence != "" else "Not available" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section class="rubric-subsection rubric-subsection-wide">
+                    <h3>Comparison tables</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1-Score</th>
+                                    <th>ROC AUC OvR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in supervised_modeling.metric_rows %}
+                                <tr>
+                                    <td>{{ row.model }}</td>
+                                    <td>{{ row.accuracy|decimal }}</td>
+                                    <td>{{ row.precision|decimal }}</td>
+                                    <td>{{ row.recall|decimal }}</td>
+                                    <td>{{ row.f1_score|decimal }}</td>
+                                    <td>{{ row.roc_auc_ovr if row.roc_auc_ovr != "" else "Not available" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </article>
 
         <article id="model-engineering-artifacts" class="rubric-section">
             <div class="rubric-section-header">

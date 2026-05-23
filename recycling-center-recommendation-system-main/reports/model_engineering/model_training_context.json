@@ -1,6 +1,6 @@
 {
   "available": true,
-  "generated_at": "2026-05-22T22:27:17+00:00",
+  "generated_at": "2026-05-23T04:21:07+00:00",
   "dataset_split": {
     "total_records": 1122,
     "train_records": 897,
@@ -589,5 +589,6 @@
     "generated/model_evaluation/roc_curve_logistic_regression.png",
     "generated/model_evaluation/roc_curve_decision_tree.png",
     "generated/model_evaluation/roc_curve_random_forest.png"
-  ]
+  ],
+  "missing_artifacts": []
 }

@@ -5,9 +5,9 @@
     <p class="eyebrow">R3A3 Speaking Models / Model Evaluation</p>
     <h1>Model Evaluation Dashboard</h1>
     <p>
-        This page separates every required evaluation item into an academic dashboard: Accuracy, Precision, Recall,
-        F1-Score, ROC Curve, Confusion Matrix, Comparison Tables, Comparison Charts, Performance Analysis, and Best
-        Model Selection.
+        Objective: Evaluate the performance of multiple Machine Learning models using appropriate metrics and select
+        the best model for implementation. SmartRecycleAI is a classification task, so Accuracy, Precision, Recall,
+        F1-Score, ROC Curve, and Confusion Matrix are the primary metrics.
     </p>
 </section>
 
@@ -17,6 +17,15 @@
         <p class="eyebrow">Evaluation unavailable</p>
         <h2>The evaluation artifacts could not be loaded</h2>
         <p>{{ supervised_modeling.error }}</p>
+        {% if supervised_modeling.missing_artifacts %}
+        <p>The following required Render artifacts are missing:</p>
+        <ul>
+            {% for item in supervised_modeling.missing_artifacts %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <p>{{ supervised_modeling.render_guidance or "Run python createDataset/create_dataset.py before reviewing this page." }}</p>
     </div>
 </section>
 {% else %}
@@ -25,12 +34,16 @@
 
 <section class="section">
     <nav class="rubric-anchor-bar" aria-label="Model Evaluation academic submenu">
+        <a href="#evaluation-dashboard"><i class="fa-solid fa-gauge-high"></i>Evaluation Dashboard</a>
         <a href="#accuracy"><i class="fa-solid fa-bullseye"></i>Accuracy</a>
         <a href="#precision"><i class="fa-solid fa-crosshairs"></i>Precision</a>
         <a href="#recall"><i class="fa-solid fa-magnifying-glass-chart"></i>Recall</a>
         <a href="#f1-score"><i class="fa-solid fa-scale-balanced"></i>F1-Score</a>
         <a href="#roc-curve"><i class="fa-solid fa-chart-area"></i>ROC Curve</a>
         <a href="#confusion-matrix"><i class="fa-solid fa-border-all"></i>Confusion Matrix</a>
+        <a href="#regression-metrics"><i class="fa-solid fa-square-root-variable"></i>Regression Metrics</a>
+        <a href="#comparison-process"><i class="fa-solid fa-table-list"></i>Comparison Process</a>
+        <a href="#flask-integration"><i class="fa-solid fa-window-maximize"></i>Flask Integration</a>
         <a href="#comparison-tables"><i class="fa-solid fa-table-list"></i>Comparison Tables</a>
         <a href="#comparison-charts"><i class="fa-solid fa-chart-column"></i>Comparison Charts</a>
         <a href="#performance-analysis"><i class="fa-solid fa-comments"></i>Performance Analysis</a>
@@ -38,23 +51,33 @@
     </nav>
 </section>
 
-<section class="section stats-row">
-    <article>
-        <span>{{ supervised_modeling.best_model.metrics.accuracy|decimal }}</span>
-        <p>Best accuracy</p>
-    </article>
-    <article>
-        <span>{{ supervised_modeling.best_model.metrics.precision|decimal }}</span>
-        <p>Best precision</p>
-    </article>
-    <article>
-        <span>{{ supervised_modeling.best_model.metrics.recall|decimal }}</span>
-        <p>Best recall</p>
-    </article>
-    <article>
-        <span>{{ supervised_modeling.best_model.metrics.f1_score|decimal }}</span>
-        <p>Best F1-score</p>
-    </article>
+<section id="evaluation-dashboard" class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Required evaluation section</p>
+        <h2>Evaluation Dashboard</h2>
+        <p>
+            The dashboard summarizes the strongest test-set results and gives the teacher an immediate visual view
+            of the selected model before reviewing the metric-by-metric sections.
+        </p>
+    </div>
+    <div class="stats-row">
+        <article>
+            <span>{{ supervised_modeling.best_model.metrics.accuracy|decimal }}</span>
+            <p>Best accuracy</p>
+        </article>
+        <article>
+            <span>{{ supervised_modeling.best_model.metrics.precision|decimal }}</span>
+            <p>Best precision</p>
+        </article>
+        <article>
+            <span>{{ supervised_modeling.best_model.metrics.recall|decimal }}</span>
+            <p>Best recall</p>
+        </article>
+        <article>
+            <span>{{ supervised_modeling.best_model.metrics.f1_score|decimal }}</span>
+            <p>Best F1-score</p>
+        </article>
+    </div>
 </section>
 
 <section class="section">
@@ -87,12 +110,16 @@
 <section class="section academic-layout">
     <aside class="rubric-sidebar" aria-label="Model Evaluation section navigator">
         <p class="eyebrow">Evaluation sections</p>
+        <a href="#evaluation-dashboard">Evaluation Dashboard</a>
         <a href="#accuracy">Accuracy</a>
         <a href="#precision">Precision</a>
         <a href="#recall">Recall</a>
         <a href="#f1-score">F1-Score</a>
         <a href="#roc-curve">ROC Curve</a>
         <a href="#confusion-matrix">Confusion Matrix</a>
+        <a href="#regression-metrics">MAE, MSE, RMSE, R²</a>
+        <a href="#comparison-process">Comparison Process</a>
+        <a href="#flask-integration">Flask Integration</a>
         <a href="#comparison-tables">Comparison Tables</a>
         <a href="#comparison-charts">Comparison Charts</a>
         <a href="#performance-analysis">Performance Analysis</a>
@@ -271,6 +298,39 @@
             </div>
         </article>
 
+        <article id="regression-metrics" class="rubric-section">
+            <div class="rubric-section-header">
+                <div>
+                    <p class="eyebrow">Academic completeness</p>
+                    <h2>Regression Metrics: MAE, MSE, RMSE, and R²</h2>
+                </div>
+                <span class="rubric-badge">Not primary for this task</span>
+            </div>
+            <p>
+                SmartRecycleAI's current supervised task is <strong>classification</strong>, because the model
+                predicts a municipal priority class. Therefore, classification metrics are the primary evaluation
+                metrics. Regression metrics are included here for academic completeness.
+            </p>
+            <div class="rubric-mini-grid">
+                <article>
+                    <h3>MAE</h3>
+                    <p>Mean Absolute Error measures the average absolute difference between numeric predictions and real numeric values.</p>
+                </article>
+                <article>
+                    <h3>MSE</h3>
+                    <p>Mean Squared Error squares errors before averaging them, giving stronger penalty to large numeric mistakes.</p>
+                </article>
+                <article>
+                    <h3>RMSE</h3>
+                    <p>Root Mean Squared Error returns the squared-error measure to the original target unit.</p>
+                </article>
+                <article>
+                    <h3>R²</h3>
+                    <p>R² explains how much variance in a numeric target is explained by a regression model.</p>
+                </article>
+            </div>
+        </article>
+
         <article id="comparison-tables" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
@@ -311,6 +371,34 @@
             </div>
         </article>
 
+        <article id="comparison-process" class="rubric-section">
+            <div class="rubric-section-header">
+                <div>
+                    <p class="eyebrow">Required comparison workflow</p>
+                    <h2>Comparison Process</h2>
+                </div>
+                <span class="rubric-badge">Model selection logic</span>
+            </div>
+            <div class="rubric-subsection-grid">
+                <section class="rubric-subsection">
+                    <h3>Metric comparison tables</h3>
+                    <p>The reusable table compares Accuracy, Precision, Recall, F1-Score, and ROC AUC OvR for all three models.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Graphical comparisons</h3>
+                    <p>Generated charts summarize model performance visually for screenshots and final PDF evidence.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Performance analysis</h3>
+                    <p>The analysis interprets what each metric means for recycling infrastructure priority decisions.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Best model selection justification</h3>
+                    <p>{{ supervised_modeling.best_model.explanation }}</p>
+                </section>
+            </div>
+        </article>
+
         <article id="comparison-charts" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
@@ -340,6 +428,38 @@
                     {% endif %}
                     <figcaption>Best model chart: focused performance summary for the selected classifier.</figcaption>
                 </figure>
+            </div>
+        </article>
+
+        <article id="flask-integration" class="rubric-section">
+            <div class="rubric-section-header">
+                <div>
+                    <p class="eyebrow">Required implementation evidence</p>
+                    <h2>Flask Integration</h2>
+                </div>
+                <span class="rubric-badge">Evaluation route</span>
+            </div>
+            <div class="rubric-subsection-grid">
+                <section class="rubric-subsection">
+                    <h3>Evaluation dashboards</h3>
+                    <p>The Flask page renders the Evaluation Dashboard using the stored model evaluation JSON context.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Metric visualizations</h3>
+                    <p>Metric charts are served from static/generated/model_evaluation with Render-safe static paths.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Confusion matrix or regression charts</h3>
+                    <p>Because this is classification, confusion matrices are shown as the primary error visualization. Regression metrics are explained for academic completeness.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Comparative analysis section</h3>
+                    <p>Comparison tables and charts are grouped so the teacher can inspect model tradeoffs quickly.</p>
+                </section>
+                <section class="rubric-subsection">
+                    <h3>Final selected model section</h3>
+                    <p>The selected model is {{ supervised_modeling.best_model.display_name }}, which is used by the Prediction System.</p>
+                </section>
             </div>
         </article>
 

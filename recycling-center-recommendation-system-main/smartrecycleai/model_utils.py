@@ -4,7 +4,7 @@ import json
 import math
 import pickle
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 
@@ -143,8 +143,25 @@ def save_plot(fig, output_dir: Path, filename: str) -> str:
     return f"generated/{output_dir.name}/{filename}"
 
 
-def chart_exists(static_path: str) -> bool:
+def project_relative(path: Path) -> str:
+    try:
+        return path.relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def static_path_to_file(static_path: str) -> Path | None:
     if not static_path:
-        return False
-    relative = static_path.replace("/", "\\")
-    return (PROJECT_ROOT / "static" / relative).exists()
+        return None
+    normalized = str(static_path).strip().lstrip("/").replace("\\", "/")
+    if normalized.startswith("static/"):
+        normalized = normalized.removeprefix("static/")
+    parts = PurePosixPath(normalized).parts
+    if not parts or ".." in parts:
+        return None
+    return PROJECT_ROOT / "static" / Path(*parts)
+
+
+def chart_exists(static_path: str) -> bool:
+    path = static_path_to_file(static_path)
+    return bool(path and path.exists())

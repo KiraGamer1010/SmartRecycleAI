@@ -86,6 +86,8 @@ def prediction_form_context() -> dict[str, Any]:
     return {
         "available": error is None,
         "error": error,
+        "missing_artifacts": context.get("missing_artifacts", []),
+        "render_guidance": context.get("render_guidance", ""),
         "fields": _feature_rows_from_manifest(manifest),
         "best_model": best_model,
         "model_name": best_model.get("display_name") or (model_payload or {}).get("display_name", ""),

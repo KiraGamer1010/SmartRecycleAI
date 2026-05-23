@@ -34,6 +34,7 @@ from .model_utils import (
     frame_records,
     json_value,
     prepare_axis,
+    project_relative,
     read_json,
     read_pickle,
     save_plot,
@@ -124,6 +125,35 @@ MODEL_DEFINITIONS = {
         },
     },
 }
+
+
+def _expected_model_artifacts() -> list[Path]:
+    return [
+        MODELS_DIR / definition["artifact"]
+        for definition in MODEL_DEFINITIONS.values()
+    ] + [BEST_MODEL_FILE, MODEL_MANIFEST_FILE]
+
+
+def _expected_report_artifacts() -> list[Path]:
+    return [
+        MODEL_CONTEXT_FILE,
+        MODEL_EVALUATION_FILE,
+        MODEL_METRICS_CSV,
+        PREDICTION_SAMPLE_CSV,
+    ]
+
+
+def _missing_artifacts(context: dict[str, Any] | None = None) -> list[str]:
+    missing = [
+        project_relative(path)
+        for path in [*_expected_model_artifacts(), *_expected_report_artifacts()]
+        if not path.exists()
+    ]
+    if context:
+        for chart_path in context.get("required_chart_paths", []):
+            if chart_path and not chart_exists(chart_path):
+                missing.append(f"static/{chart_path}")
+    return sorted(dict.fromkeys(missing))
 
 
 def _load_feature_matrix():
@@ -458,9 +488,11 @@ def _feature_summary(frame, features: list[str]) -> list[dict[str, Any]]:
 def train_supervised_models(force: bool = False) -> dict[str, Any]:
     if not force:
         cached = read_json(MODEL_CONTEXT_FILE)
-        if cached and cached.get("available") and BEST_MODEL_FILE.exists():
+        required_files_exist = all(path.exists() for path in [*_expected_model_artifacts(), *_expected_report_artifacts()])
+        if cached and cached.get("available") and required_files_exist:
             required_charts = cached.get("required_chart_paths", [])
             if all(chart_exists(path) for path in required_charts):
+                cached["missing_artifacts"] = []
                 return cached
 
     ensure_model_directories()
@@ -711,6 +743,7 @@ def train_supervised_models(force: bool = False) -> dict[str, Any]:
             *[result["chart_paths"].get("roc_curve", "") for result in serializable_models],
         ],
     }
+    context["missing_artifacts"] = []
 
     write_json(MODEL_CONTEXT_FILE, context)
     write_json(MODEL_EVALUATION_FILE, context)
@@ -723,12 +756,20 @@ def get_model_training_context() -> dict[str, Any]:
     try:
         return train_supervised_models(force=False)
     except Exception as exc:
+        cached = read_json(MODEL_CONTEXT_FILE)
         return {
             "available": False,
             "error": str(exc),
+            "missing_artifacts": _missing_artifacts(cached),
+            "render_guidance": (
+                "On Render, regenerate the required ML artifacts during build with: "
+                "pip install -r requirements.txt && python createDataset/create_dataset.py"
+            ),
             "models": [],
             "metric_rows": [],
             "prediction_examples": [],
+            "dataset_split": {},
+            "best_model": {},
             "charts": {"model_engineering": {}, "model_evaluation": {}, "prediction_system": {}},
         }
 
