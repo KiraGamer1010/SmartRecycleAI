@@ -12,7 +12,7 @@ The project follows the CRISP-ML workflow and presents the work as a modern AI a
 - University: University of Cundinamarca.
 - Campus: Chia, Cundinamarca.
 - Date: May 16, 2026.
-- Authors: Juan Esteban Castiblanco, Cristian Mauricio Muñoz, Jean Pierre Gonzalez, and Juan David Capera.
+- Authors: Juan Esteban Castiblanco, Cristian Mauricio Muñoz, and Juan David Capera.
 
 ## Architecture
 

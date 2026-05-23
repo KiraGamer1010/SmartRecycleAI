@@ -4,7 +4,6 @@ export const theoryDocument = {
   authors: [
     "Juan Esteban Castiblanco",
     "Cristian Mauricio Muñoz",
-    "Jean Pierre Gonzalez",
     "Juan David Capera"
   ],
   course: "Machine Learning",
@@ -127,7 +126,7 @@ export const theorySections = [
     paragraphs: [
       theoryDocument.deliverable,
       theoryDocument.project,
-      "Autores: Juan Esteban Castiblanco, Cristian Mauricio Muñoz, Jean Pierre Gonzalez, Juan David Capera.",
+      "Autores: Juan Esteban Castiblanco, Cristian Mauricio Muñoz, Juan David Capera.",
       "Asignatura: Machine Learning.",
       "Universidad: Universidad de Cundinamarca.",
       "Sede: Chía, Cundinamarca.",

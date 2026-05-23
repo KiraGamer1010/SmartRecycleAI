@@ -37,8 +37,7 @@ http://127.0.0.1:5000
 ## Authors
 
 - Juan Esteban Castiblanco
-- Cristian Mauricio Munoz
-- Jean Pierre Gonzalez
+- Cristian Mauricio Muñoz
 - Juan David Capera
 
 ## Institution
