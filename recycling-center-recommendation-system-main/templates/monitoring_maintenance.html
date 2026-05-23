@@ -78,4 +78,81 @@
         </article>
     </div>
 </section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Monitoring plan</p>
+        <h2>Drift, errors, and retraining triggers</h2>
+        <p>
+            Monitoring is required because Machine Learning systems degrade when the world changes. Recycling
+            facilities may close, population pressure may increase, reporting patterns may change, and the model's
+            original assumptions may become less valid.
+        </p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Monitoring area</th>
+                    <th>Signal to review</th>
+                    <th>Maintenance response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data drift</td>
+                    <td>Feature ranges, missing values, class distribution, new facility counts, and updated projections.</td>
+                    <td>Refresh the dataset, regenerate features, and compare distributions with previous reports.</td>
+                </tr>
+                <tr>
+                    <td>Performance drift</td>
+                    <td>Lower accuracy, precision, recall, F1-score, or expert disagreement with predictions.</td>
+                    <td>Re-evaluate the models on updated labels and retrain when performance falls below the accepted threshold.</td>
+                </tr>
+                <tr>
+                    <td>Error tracking</td>
+                    <td>Invalid form submissions, missing artifacts, broken chart paths, or failed page loads.</td>
+                    <td>Log incidents, fix artifacts, and verify Flask routes before redeployment.</td>
+                </tr>
+                <tr>
+                    <td>Governance</td>
+                    <td>Changes in policy, budget, recycling rules, or institutional priorities.</td>
+                    <td>Review model assumptions and document each new version before public use.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Maintenance Schedule</h2>
+            <p>
+                A practical academic schedule is monthly route and artifact validation, quarterly data refresh
+                review, semester-level model retraining, and annual methodology review with updated environmental
+                and municipal planning criteria.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Future Improvements</h2>
+            <p>
+                Future work should add automated monitoring reports, external validation labels, user feedback
+                capture, model version comparison, cost-aware recommendations, GIS integration, and deployment logs.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Monitoring and Maintenance evidence</h2>
+        <p>
+            This page documents model monitoring, data drift, performance drift, retraining plans, error tracking,
+            maintenance schedules, governance review, and future improvements. It completes the CRISP-ML lifecycle
+            by explaining how the model should remain reliable after deployment.
+        </p>
+    </div>
+</section>
 {% endblock %}

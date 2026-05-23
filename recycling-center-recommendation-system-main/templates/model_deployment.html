@@ -81,4 +81,87 @@
         </article>
     </div>
 </section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Render deployment plan</p>
+        <h2>Production workflow and configuration</h2>
+        <p>
+            SmartRecycleAI remains compatible with Render.com because it uses a standard Flask WSGI entry point,
+            dependency file, Procfile, and Render service definition. Deployment does not require a separate heavy
+            ML server; the trained model artifacts and generated static evidence are served by the same application.
+        </p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Deployment item</th>
+                    <th>Project file or behavior</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>WSGI entry point</td>
+                    <td>wsgi.py</td>
+                    <td>Exposes the Flask application to a production server.</td>
+                </tr>
+                <tr>
+                    <td>Build command</td>
+                    <td>Install dependencies and generate required datasets or artifacts when configured.</td>
+                    <td>Prepares the environment before the web service starts.</td>
+                </tr>
+                <tr>
+                    <td>Start command</td>
+                    <td>Gunicorn or the configured Procfile command.</td>
+                    <td>Runs Flask in a production-compatible process.</td>
+                </tr>
+                <tr>
+                    <td>Model artifacts</td>
+                    <td>models/best_model.pkl and related classifier files.</td>
+                    <td>Allow Prediction System inference without retraining during each request.</td>
+                </tr>
+                <tr>
+                    <td>Static charts</td>
+                    <td>static/generated/</td>
+                    <td>Provides visual evidence for academic pages and PDF screenshots.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Deployment Validation</h2>
+            <p>
+                A deployment is valid when the home page, CRISP-ML pages, Model Engineering, Model Evaluation,
+                Prediction System, K-Means evidence, and supporting documentation return HTTP 200 and the prediction
+                form can produce a result.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Limitations and Maintenance</h2>
+            <p>
+                Render deployment should be monitored for artifact availability, dependency compatibility, model file
+                loading, static chart paths, and memory use. Future production versions may add environment variables
+                for secure configuration, logs, and external data refresh schedules.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Model Deployment evidence</h2>
+        <p>
+            This page explains Render deployment, production workflow, deployment architecture, build/start concepts,
+            model artifacts, validation checks, and maintenance considerations. It shows that SmartRecycleAI was
+            prepared for public execution without changing the Machine Learning logic.
+        </p>
+    </div>
+</section>
 {% endblock %}

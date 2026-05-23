@@ -41,12 +41,12 @@
         <article>
             <span>04</span>
             <h2>Model Engineering</h2>
-            <p>Fit K-Means over standardized sustainability and infrastructure signals.</p>
+            <p>Train supervised classifiers and preserve K-Means as supporting unsupervised evidence.</p>
         </article>
         <article>
             <span>05</span>
             <h2>Model Evaluation</h2>
-            <p>Evaluate Silhouette Score, Davies-Bouldin Index, inertia, and WCSS.</p>
+            <p>Compare supervised metrics, confusion matrices, ROC curves, and clustering validation evidence.</p>
         </article>
         <article>
             <span>06</span>
@@ -81,12 +81,12 @@
         <article>
             <span>4</span>
             <h2>Model Engineering</h2>
-            <p>Defines algorithm selection and includes a real K-Means clustering implementation for municipal planning profiles.</p>
+            <p>Defines algorithm selection and includes Logistic Regression, Decision Tree, Random Forest, and supporting K-Means profiles.</p>
         </article>
         <article>
             <span>5</span>
             <h2>Model Evaluation</h2>
-            <p>Verifies performance, generalization, risks, and practical relevance through metrics and expert review.</p>
+            <p>Verifies performance, generalization, risks, and practical relevance through test-set metrics and expert interpretation.</p>
         </article>
         <article>
             <span>6</span>
@@ -133,13 +133,13 @@
                 </tr>
                 <tr>
                     <td>Model Engineering</td>
-                    <td>Algorithm selection, training strategy, validation planning, hyperparameter tuning, and K-Means clustering.</td>
-                    <td>Dedicated model engineering page plus a real K-Means analysis with selected features, scaling, elbow method, clusters, and centroids.</td>
+                    <td>Algorithm selection, dataset split, training strategy, hyperparameters, validation planning, supervised classifiers, and K-Means clustering.</td>
+                    <td>Dedicated model engineering page plus K-Means analysis with selected features, scaling, elbow method, clusters, and centroids.</td>
                 </tr>
                 <tr>
                     <td>Model Evaluation</td>
-                    <td>Metrics, cross validation, risk analysis, and expert review for recommendation quality.</td>
-                    <td>Dedicated evaluation page with classification, regression, ranking, and interpretability metrics.</td>
+                    <td>Accuracy, precision, recall, F1-score, ROC curves, confusion matrices, risk analysis, and expert review for recommendation quality.</td>
+                    <td>Dedicated evaluation page with classification metrics, comparative tables, comparative charts, and best-model selection.</td>
                 </tr>
                 <tr>
                     <td>Prediction System</td>
@@ -158,6 +158,80 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Detailed methodology explanation</p>
+        <h2>Why CRISP-ML is useful for SmartRecycleAI</h2>
+        <p>
+            CRISP-ML extends the traditional CRISP-DM mindset by adding stronger attention to model quality,
+            operationalization, monitoring, and maintainability. This matters because a recycling recommendation
+            model must be technically correct, understandable for teachers, and responsible enough to support
+            real municipal planning conversations.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-compass"></i> Methodological Control</h3>
+            <p>Each project decision is mapped to a phase, preventing the application from becoming a collection of disconnected pages.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-clipboard-check"></i> Quality Assurance</h3>
+            <p>The process requires reproducible data preparation, consistent preprocessing, test-set evaluation, and visible evidence.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-server"></i> Operational Thinking</h3>
+            <p>Deployment, prediction forms, monitoring, and maintenance are treated as part of the ML lifecycle, not as optional extras.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Comparison with traditional development</p>
+        <h2>Why a Machine Learning project needs more than normal software phases</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Traditional software focus</th>
+                    <th>CRISP-ML focus</th>
+                    <th>SmartRecycleAI application</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Build features from fixed requirements.</td>
+                    <td>Define a measurable learning problem and validate assumptions with data.</td>
+                    <td>The project connects recycling planning needs with public municipal datasets.</td>
+                </tr>
+                <tr>
+                    <td>Test whether screens and functions work.</td>
+                    <td>Test whether the model generalizes and whether preprocessing is reproducible.</td>
+                    <td>Evaluation uses held-out test data, metrics, charts, and reusable artifacts.</td>
+                </tr>
+                <tr>
+                    <td>Deploy once the application is complete.</td>
+                    <td>Deploy with monitoring, retraining criteria, and model risk controls.</td>
+                    <td>Render compatibility, prediction error handling, and monitoring guidance are documented.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>What this methodology page proves</h2>
+        <p>
+            The page demonstrates that SmartRecycleAI follows a complete CRISP-ML logic: business framing, dataset
+            analysis, engineering, supervised and unsupervised modeling, evaluation, deployment, and monitoring are
+            shown as connected academic phases with quality controls.
+        </p>
     </div>
 </section>
 {% endblock %}

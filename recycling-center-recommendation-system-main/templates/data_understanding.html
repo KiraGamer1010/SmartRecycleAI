@@ -122,4 +122,112 @@
         </table>
     </div>
 </section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Dataset selection justification</p>
+        <h2>Why these sources are appropriate for Machine Learning</h2>
+        <p>
+            The selected datasets represent the main dimensions required for recycling infrastructure analysis:
+            population demand, social vulnerability, facility availability, recyclable potential, hazardous waste
+            pressure, and demographic growth. This mix allows SmartRecycleAI to model the problem with numerical
+            and categorical evidence rather than relying on a single administrative indicator.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-hashtag"></i> Numerical Variables</h3>
+            <p>Population, density, waste kilograms, collection coverage, distances, capacity, growth, and poverty indicators support statistical modeling.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-tags"></i> Categorical Variables</h3>
+            <p>Municipality, department, source labels, priority classes, and facility status support grouping, interpretation, and target construction.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-earth-americas"></i> Real-world Context</h3>
+            <p>Every source contributes to a public planning question: where recycling infrastructure should be strengthened or created.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">EDA interpretation</p>
+        <h2>How to read the exploratory analysis</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>EDA element</th>
+                    <th>Purpose</th>
+                    <th>Technical interpretation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Missing value analysis</td>
+                    <td>Identify incomplete sources and decide cleaning strategy.</td>
+                    <td>Missing rates guide imputation, exclusion, and quality warnings before model training.</td>
+                </tr>
+                <tr>
+                    <td>Distribution charts</td>
+                    <td>Understand skew, extreme values, and scale differences.</td>
+                    <td>Skewed waste and capacity variables justify scaling and robust interpretation.</td>
+                </tr>
+                <tr>
+                    <td>Correlation analysis</td>
+                    <td>Detect relationships among demand, access, vulnerability, and infrastructure indicators.</td>
+                    <td>Correlations support feature review but do not prove causality.</td>
+                </tr>
+                <tr>
+                    <td>Scatter analysis</td>
+                    <td>Connect poverty and access conditions visually.</td>
+                    <td>Relationships help explain why social indicators matter in recycling planning.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Data Quality Evaluation</h2>
+            <p>
+                Data quality is evaluated through row counts, column counts, variable types, missing values,
+                duplicate records, source-specific quality notes, and relationship checks. The project avoids silent
+                assumptions by showing these profiles directly in the Flask application.
+            </p>
+            <p>
+                This matters for Machine Learning because poor source quality can produce unstable features,
+                unreliable model metrics, and misleading recommendations.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Data Limitations</h2>
+            <p>
+                Public datasets may use different reporting cycles, naming conventions, formats, and geographic
+                granularity. Some records require normalization before joins, and not every variable represents a
+                direct causal factor.
+            </p>
+            <p>
+                SmartRecycleAI treats these limitations as part of the academic analysis and connects them to the
+                engineering phase where cleaning and transformations are documented.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Data Understanding evidence</h2>
+        <p>
+            This page proves that the project reviewed dataset sources, variable types, missing values, data
+            quality, statistical summaries, correlations, chart interpretation, and limitations before engineering
+            features or training Machine Learning models.
+        </p>
+    </div>
+</section>
 {% endblock %}

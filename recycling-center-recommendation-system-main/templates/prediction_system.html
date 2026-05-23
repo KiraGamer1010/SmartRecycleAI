@@ -35,6 +35,32 @@
     </nav>
 </section>
 
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Operational purpose</p>
+        <h2>From evaluated model to usable prediction workflow</h2>
+        <p>
+            The Prediction System demonstrates the final CRISP-ML transition from code to an interactive decision
+            support page. It loads the selected model artifact, applies the same preprocessing pipeline used during
+            training, validates user inputs, and returns a class prediction with probabilities and confidence.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-box-archive"></i> Artifact Loading</h3>
+            <p>The page uses the stored best model pipeline rather than rebuilding model logic inside the template.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-filter"></i> Preprocessing Consistency</h3>
+            <p>Submitted values are mapped to the same feature order and transformations used during training.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-user-check"></i> Teacher Demonstration</h3>
+            <p>The form, result, probabilities, confidence score, and error messages create screenshot-ready evidence.</p>
+        </article>
+    </div>
+</section>
+
 <section class="section academic-layout prediction-layout">
     <aside class="rubric-sidebar" aria-label="Prediction System section navigator">
         <p class="eyebrow">Prediction workflow</p>
@@ -318,6 +344,18 @@
                 </article>
             </div>
         </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Prediction System evidence</h2>
+        <p>
+            This page proves that the project moved beyond static model reporting. It includes user input, backend
+            prediction logic, model artifact loading, preprocessing consistency, result display, probability display,
+            confidence score, visualization, validation messages, and friendly instructions in English.
+        </p>
     </div>
 </section>
 

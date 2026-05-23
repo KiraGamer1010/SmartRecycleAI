@@ -80,4 +80,81 @@
         </table>
     </div>
 </section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Dataset overview</p>
+        <h2>What the processed dataset represents</h2>
+        <p>
+            The modeling dataset is the final analytical table produced by the data pipeline. Each row represents a
+            municipality profile, and each column contributes either descriptive context, engineered ML evidence, or
+            the target label used by supervised classifiers.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-chart-pie"></i> Priority Distribution</h3>
+            <p>The priority chart shows how target classes are distributed and helps detect imbalance before model evaluation.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-flask"></i> Statistical Evidence</h3>
+            <p>Summary charts and tables explain the scale, spread, and relationships of variables used by the models.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-brain"></i> Model Relationship</h3>
+            <p>The same processed dataset supports supervised classification, K-Means clustering, and the prediction form defaults.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Chart interpretation</p>
+        <h2>How dataset analysis supports ML decisions</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Evidence</th>
+                    <th>What it shows</th>
+                    <th>Why it matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Priority distribution</td>
+                    <td>Number of municipalities by target class.</td>
+                    <td>Helps interpret accuracy, precision, recall, and F1-score fairly.</td>
+                </tr>
+                <tr>
+                    <td>Hazardous waste trend</td>
+                    <td>Environmental pressure across time.</td>
+                    <td>Connects recycling planning to broader sustainability risk.</td>
+                </tr>
+                <tr>
+                    <td>Household growth</td>
+                    <td>Future demand pressure in the capital household projection dataset.</td>
+                    <td>Shows why demographic variables can influence infrastructure planning.</td>
+                </tr>
+                <tr>
+                    <td>Correlation heatmap</td>
+                    <td>Relationships among selected numerical indicators.</td>
+                    <td>Supports feature interpretation and detects redundant or related predictors.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Dataset Analysis evidence</h2>
+        <p>
+            This page documents the processed dataset, class distribution, chart interpretation, statistical
+            evidence, data relationships, and the connection between data analysis and the Machine Learning models.
+        </p>
+    </div>
+</section>
 {% endblock %}

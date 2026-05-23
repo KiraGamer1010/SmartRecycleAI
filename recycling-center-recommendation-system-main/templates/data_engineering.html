@@ -86,4 +86,87 @@
         {% endfor %}
     </div>
 </section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Transformation documentation</p>
+        <h2>Machine Learning preparation decisions</h2>
+        <p>
+            Data engineering is the CRISP-ML phase where raw files become reliable model inputs. The project
+            documents each transformation so a teacher can connect the original datasets with the supervised
+            classifiers, K-Means clustering, generated charts, and prediction form.
+        </p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Requirement</th>
+                    <th>Implementation</th>
+                    <th>ML reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data cleaning</td>
+                    <td>Source-specific parsing, normalized text keys, numeric conversion, and duplicate handling.</td>
+                    <td>Prevents inconsistent values from becoming false modeling patterns.</td>
+                </tr>
+                <tr>
+                    <td>Null value handling</td>
+                    <td>Pipeline-level imputation and quality indicators are used before modeling.</td>
+                    <td>Allows models to train without hiding missingness problems from the academic report.</td>
+                </tr>
+                <tr>
+                    <td>Categorical encoding</td>
+                    <td>Priority labels are encoded for classification, while descriptive labels remain visible for interpretation.</td>
+                    <td>Converts human-readable classes into model-compatible targets.</td>
+                </tr>
+                <tr>
+                    <td>Feature engineering</td>
+                    <td>Creates access gap, pressure, capacity, growth, facility availability, and vulnerability indicators.</td>
+                    <td>Transforms raw measurements into decision-oriented predictors.</td>
+                </tr>
+                <tr>
+                    <td>Normalization and scaling</td>
+                    <td>Model-ready features are scaled for algorithms that are sensitive to units and magnitude.</td>
+                    <td>Improves fair comparison among population, waste, distance, and capacity variables.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Feature Selection</h2>
+            <p>
+                Feature selection focuses on variables that directly describe recycling demand, social need,
+                infrastructure access, facility capacity, environmental pressure, and demographic growth. These
+                variables are understandable for academic review and relevant to the project objective.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Reproducibility</h2>
+            <p>
+                The transformation logic is centralized in the shared data pipeline, meaning charts, processed CSV
+                files, Flask pages, K-Means artifacts, supervised model reports, and prediction metadata are derived
+                from the same preparation process.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Data Engineering evidence</h2>
+        <p>
+            This page documents cleaning, null value handling, transformations, encoding, feature selection, feature
+            engineering, normalization, processed outputs, and reproducibility. It shows that the Machine Learning
+            models are based on a documented engineering pipeline instead of manual spreadsheet manipulation.
+        </p>
+    </div>
+</section>
 {% endblock %}

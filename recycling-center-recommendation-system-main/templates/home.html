@@ -76,4 +76,93 @@
         </figure>
     </div>
 </section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Environmental problem</p>
+        <h2>Why the project matters</h2>
+        <p>
+            Recycling infrastructure planning is a Machine Learning problem because municipalities are not equal:
+            they differ in population pressure, recyclable waste generation, collection coverage, facility capacity,
+            accessibility, social vulnerability, and hazardous waste exposure. SmartRecycleAI turns those conditions
+            into measurable indicators so decisions can be compared with evidence instead of isolated assumptions.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-trash-can-arrow-up"></i> Demand Pressure</h3>
+            <p>Municipalities with more recyclable material need stronger collection and processing capacity.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-road"></i> Access Gap</h3>
+            <p>Distance, coverage, and existing center availability affect whether citizens can participate in recovery systems.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-chart-line"></i> Planning Evidence</h3>
+            <p>The platform connects raw datasets, engineered features, models, charts, and prediction results in one academic portal.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">CRISP-ML phase map</p>
+        <h2>How the application is organized</h2>
+    </div>
+    <div class="timeline">
+        <article><span>1</span><h2>Business Understanding</h2><p>Defines the recycling planning problem, objectives, stakeholders, risks, and expected impact.</p></article>
+        <article><span>2</span><h2>Data Understanding</h2><p>Explains source datasets, variable types, EDA evidence, missing values, and statistical behavior.</p></article>
+        <article><span>3</span><h2>Data Engineering</h2><p>Documents cleaning, integration, feature engineering, target encoding, scaling, and processed artifacts.</p></article>
+        <article><span>4</span><h2>Model Engineering</h2><p>Trains Logistic Regression, Decision Tree, and Random Forest using a reproducible supervised pipeline.</p></article>
+        <article><span>5</span><h2>Model Evaluation</h2><p>Compares accuracy, precision, recall, F1-score, confusion matrices, and ROC curves on test data.</p></article>
+        <article><span>6</span><h2>Prediction System</h2><p>Loads the selected model and produces class predictions, probabilities, and confidence scores.</p></article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Final system capabilities</p>
+        <h2>Supervised, unsupervised, and operational outputs</h2>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Capability</th>
+                    <th>Implementation</th>
+                    <th>Teacher-friendly interpretation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Supervised classification</td>
+                    <td>Logistic Regression, Decision Tree, and Random Forest.</td>
+                    <td>Predicts municipal recycling priority classes using engineered indicators.</td>
+                </tr>
+                <tr>
+                    <td>Unsupervised clustering</td>
+                    <td>K-Means over standardized planning features.</td>
+                    <td>Discovers groups of municipalities with similar infrastructure and sustainability profiles.</td>
+                </tr>
+                <tr>
+                    <td>Prediction workflow</td>
+                    <td>Flask form, validation, model artifact loading, probabilities, and confidence score.</td>
+                    <td>Demonstrates how academic ML code becomes a usable decision-support system.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>What this home page proves</h2>
+        <p>
+            The landing page demonstrates that SmartRecycleAI is not only a visual dashboard. It is a structured
+            CRISP-ML platform that connects business motivation, data preparation, supervised models, K-Means
+            clustering, evaluation evidence, and a functional prediction interface in one Flask application.
+        </p>
+    </div>
+</section>
 {% endblock %}

@@ -53,6 +53,32 @@
     </article>
 </section>
 
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Supervised learning foundation</p>
+        <h2>Why classification is appropriate for SmartRecycleAI</h2>
+        <p>
+            Model Engineering converts the engineered municipal feature matrix into trained classifiers. The task is
+            supervised because the dataset contains a priority class target, and the goal is to learn patterns that
+            connect planning indicators with recycling intervention priority.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-database"></i> Model Input</h3>
+            <p>Numerical features represent demand, access, vulnerability, infrastructure capacity, environmental pressure, and growth.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-bullseye"></i> Model Target</h3>
+            <p>The target column is {{ supervised_modeling.dataset_split.target_column }}, a categorical priority class used for supervised classification.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Reproducibility</h3>
+            <p>The split uses random_state {{ supervised_modeling.dataset_split.random_state }} and stores trained pipelines as reusable artifacts.</p>
+        </article>
+    </div>
+</section>
+
 <section class="section academic-layout">
     <aside class="rubric-sidebar" aria-label="Model Engineering section navigator">
         <p class="eyebrow">Internal academic submenu</p>
@@ -310,6 +336,28 @@
                         model selection.
                     </p>
                 </section>
+
+                <section class="rubric-subsection">
+                    <h3>Strengths and Limitations</h3>
+                    {% if model.display_name == "Logistic Regression" %}
+                    <p>
+                        Strength: high interpretability and a strong baseline for probability-based classification.
+                        Limitation: linear decision boundaries may not capture complex interactions between waste,
+                        access, infrastructure, and vulnerability.
+                    </p>
+                    {% elif model.display_name == "Decision Tree" %}
+                    <p>
+                        Strength: rule-based logic is easy to explain in academic review. Limitation: one tree can
+                        overfit local patterns even when depth and leaf restrictions are applied.
+                    </p>
+                    {% else %}
+                    <p>
+                        Strength: combines many trees to improve stability and capture nonlinear relationships.
+                        Limitation: less transparent than a single tree and requires careful interpretation through
+                        metrics, charts, and feature evidence.
+                    </p>
+                    {% endif %}
+                </section>
             </div>
         </article>
         {% endfor %}
@@ -348,6 +396,19 @@
                 </article>
             </div>
         </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Model Engineering evidence</h2>
+        <p>
+            This page proves that SmartRecycleAI implements a complete supervised training phase: dataset split,
+            training process, hyperparameters, validation, predictions, code explanation, graphs, results, model
+            artifacts, strengths, and limitations are documented separately for Logistic Regression, Decision Tree,
+            and Random Forest.
+        </p>
     </div>
 </section>
 {% endif %}

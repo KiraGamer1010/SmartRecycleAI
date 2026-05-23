@@ -75,6 +75,7 @@ def model_engineering():
 
 
 @main_bp.route("/k-means-clustering")
+@main_bp.route("/kmeans-clustering")
 def kmeans_clustering():
     return render_template(
         "kmeans_clustering.html",
@@ -138,6 +139,7 @@ def model_deployment():
 
 
 @main_bp.route("/monitoring-and-maintenance")
+@main_bp.route("/monitoring-maintenance")
 def monitoring_maintenance():
     return render_template(
         "monitoring_maintenance.html",

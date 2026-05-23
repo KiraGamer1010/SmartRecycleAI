@@ -83,4 +83,82 @@
         </table>
     </div>
 </section>
+
+<section class="section muted">
+    <div class="section-heading">
+        <p class="eyebrow">Pipeline architecture</p>
+        <h2>From raw files to reusable ML artifacts</h2>
+        <p>
+            The data pipeline is the technical bridge between CRISP-ML Data Engineering and every model page. It
+            reads raw repository datasets, standardizes them, creates engineered features, exports processed files,
+            generates charts, and prepares the feature matrix consumed by both modeling and prediction workflows.
+        </p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pipeline layer</th>
+                    <th>Action</th>
+                    <th>Generated evidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Raw data ingestion</td>
+                    <td>Reads CSV, XLS, and XLSX files from the repository datasets folder.</td>
+                    <td>Dataset inventory and source profiles.</td>
+                </tr>
+                <tr>
+                    <td>Cleaning</td>
+                    <td>Parses numbers, dates, text keys, facility status, and municipal identifiers.</td>
+                    <td>Quality summaries, missing value charts, and cleaned tables.</td>
+                </tr>
+                <tr>
+                    <td>Feature engineering</td>
+                    <td>Builds access, demand, pressure, growth, capacity, and vulnerability features.</td>
+                    <td>Model-ready feature matrix and feature tags.</td>
+                </tr>
+                <tr>
+                    <td>Artifact generation</td>
+                    <td>Writes processed CSV files, generated charts, model reports, and reusable context.</td>
+                    <td>Static visuals, reports, downloads, and Flask dashboard context.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <div class="grid two">
+        <article class="text-panel">
+            <h2>Reproducibility</h2>
+            <p>
+                The same pipeline powers the home dashboard, Data Understanding, Data Engineering, Dataset Analysis,
+                K-Means Clustering, Model Engineering, Model Evaluation, and Prediction System pages. This avoids
+                separate manual calculations across the application.
+            </p>
+        </article>
+        <article class="text-panel">
+            <h2>Model-ready Dataset</h2>
+            <p>
+                The final feature matrix includes consistent numerical inputs, encoded targets, and defaults used by
+                the Prediction System. It is designed to support future improvements without changing the academic
+                route structure.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Data Pipeline evidence</h2>
+        <p>
+            This page explains pipeline architecture, raw ingestion, cleaning, transformation, feature engineering,
+            scaling, artifact generation, model-ready output, and reproducibility. It gives the teacher a technical
+            path from original files to final ML pages.
+        </p>
+    </div>
+</section>
 {% endblock %}

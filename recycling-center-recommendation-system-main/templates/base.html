@@ -21,7 +21,8 @@
             </button>
             <div class="nav-links" data-nav-links>
                 <a class="{{ 'active' if active_page == 'home' else '' }}" href="{{ url_for('main.home') }}"><i class="fa-solid fa-house"></i>Home</a>
-                <div class="nav-dropdown {{ 'active' if active_page in ['methodology', 'business', 'data_understanding', 'data_engineering', 'model_engineering', 'model_evaluation', 'prediction_system'] else '' }}" data-nav-dropdown>
+                <a class="{{ 'active' if active_page == 'methodology' else '' }}" href="{{ url_for('main.methodology') }}"><i class="fa-solid fa-route"></i>CRISP-ML Methodology</a>
+                <div class="nav-dropdown {{ 'active' if active_page in ['business', 'data_understanding', 'data_engineering', 'model_engineering', 'model_evaluation', 'prediction_system'] else '' }}" data-nav-dropdown>
                     <button class="dropdown-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
                         <i class="fa-solid fa-diagram-project"></i>
                         CRISP-ML Rubric
@@ -29,7 +30,6 @@
                     </button>
                     <div class="dropdown-menu" data-dropdown-menu>
                         <span class="dropdown-label">Required academic hierarchy</span>
-                        <a class="{{ 'active' if active_page == 'methodology' else '' }}" href="{{ url_for('main.methodology') }}"><i class="fa-solid fa-route"></i>CRISP-ML Methodology</a>
                         <a class="{{ 'active' if active_page == 'business' else '' }}" href="{{ url_for('main.business_understanding') }}"><i class="fa-solid fa-bullseye"></i>Business Understanding</a>
                         <a class="{{ 'active' if active_page == 'data_understanding' else '' }}" href="{{ url_for('main.data_understanding') }}"><i class="fa-solid fa-chart-line"></i>Data Understanding</a>
                         <a class="{{ 'active' if active_page == 'data_engineering' else '' }}" href="{{ url_for('main.data_engineering') }}"><i class="fa-solid fa-gears"></i>Data Engineering</a>

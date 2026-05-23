@@ -57,6 +57,33 @@
     </article>
 </section>
 
+<section class="section">
+    <div class="section-heading">
+        <p class="eyebrow">Evaluation objective</p>
+        <h2>Why model evaluation matters</h2>
+        <p>
+            Model Evaluation determines whether the trained classifiers are reliable enough to support the
+            Prediction System. A model cannot be selected only because it trains successfully; it must be tested on
+            records that were not used for fitting, compared with multiple metrics, and interpreted in relation to
+            the recycling planning problem.
+        </p>
+    </div>
+    <div class="grid three">
+        <article class="info-card">
+            <h3><i class="fa-solid fa-lock"></i> Avoid Data Leakage</h3>
+            <p>Evaluation uses the held-out test split, preserving separation between training and final metric reporting.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-chart-simple"></i> Compare Tradeoffs</h3>
+            <p>Accuracy, precision, recall, F1-score, ROC curves, and confusion matrices reveal different model behaviors.</p>
+        </article>
+        <article class="info-card">
+            <h3><i class="fa-solid fa-award"></i> Select Best Model</h3>
+            <p>Random Forest is selected because it achieves the strongest weighted F1-score and robust overall metrics.</p>
+        </article>
+    </div>
+</section>
+
 <section class="section academic-layout">
     <aside class="rubric-sidebar" aria-label="Model Evaluation section navigator">
         <p class="eyebrow">Evaluation sections</p>
@@ -387,6 +414,38 @@
                 </article>
             </div>
         </article>
+
+        <article class="rubric-section">
+            <div class="rubric-section-header">
+                <div>
+                    <p class="eyebrow">Responsible evaluation</p>
+                    <h2>Limitations of Evaluation</h2>
+                </div>
+                <span class="rubric-badge">Risk awareness</span>
+            </div>
+            <p>
+                The evaluation results are strong academic evidence, but they remain dependent on the current
+                dataset, target construction, feature quality, and public data update cycle. The model should be
+                reviewed with field experts before real investment decisions, especially because false low-priority
+                predictions could delay infrastructure action.
+            </p>
+            <p>
+                Future evaluation should include additional temporal validation, external expert labels, fairness
+                review, sensitivity analysis, and monitoring after deployment.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section class="section muted">
+    <div class="text-panel">
+        <p class="eyebrow">Academic Evidence</p>
+        <h2>Model Evaluation evidence</h2>
+        <p>
+            This page documents the evaluation objective, metric-by-metric interpretation, comparative tables,
+            comparative charts, ROC curves, confusion matrices, performance analysis, Random Forest selection, and
+            limitations. It demonstrates that the selected Prediction System model is supported by test-set evidence.
+        </p>
     </div>
 </section>
 {% endif %}
