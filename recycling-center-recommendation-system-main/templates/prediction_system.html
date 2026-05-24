@@ -65,7 +65,7 @@
         </article>
         <article class="info-card">
             <h3><i class="fa-solid fa-user-check"></i> Teacher Demonstration</h3>
-            <p>The form, result, probabilities, confidence score, and error messages create screenshot-ready evidence.</p>
+            <p>The form, result, probabilities, confidence score, and error messages make the workflow easy to inspect.</p>
         </article>
     </div>
 </section>
@@ -197,7 +197,7 @@
                 <h3>No prediction submitted yet</h3>
                 <p>
                     Complete the Input Forms and select Generate Prediction. The prediction result will appear here
-                    in a highlighted academic evidence card.
+                    in a highlighted result card.
                 </p>
             </article>
             {% endif %}
@@ -262,19 +262,17 @@
                     <p class="eyebrow">Required system section 6</p>
                     <h2>Prediction Visualization</h2>
                 </div>
-                <span class="rubric-badge">Screenshot-ready chart</span>
+                <span class="rubric-badge">Prediction chart</span>
             </div>
             <div class="grid two">
+                {% if prediction_form.default_probability_chart %}
                 <figure class="chart-frame">
-                    {% if prediction_form.default_probability_chart %}
                     <img src="{{ url_for('static', filename=prediction_form.default_probability_chart) }}" alt="Default prediction probability profile">
-                    {% else %}
-                    <div class="chart-placeholder">Default probability visualization is not available.</div>
-                    {% endif %}
                     <figcaption>Prediction Visualization: default probability profile generated from the selected model.</figcaption>
                 </figure>
+                {% endif %}
                 <article class="text-panel">
-                    <h3>Input evidence</h3>
+                    <h3>Submitted inputs</h3>
                     {% if prediction_result %}
                     <p>{{ prediction_result.method_summary }}</p>
                     <div class="table-wrap compact-table">
@@ -363,27 +361,8 @@
                         messages instead of application crashes.
                     </p>
                 </article>
-                <article>
-                    <h3>Use screenshots for evidence</h3>
-                    <p>
-                        Capture the Input Forms, Prediction Result, Probability Display, Confidence Score, and
-                        Prediction Visualization sections for the final academic report.
-                    </p>
-                </article>
             </div>
         </article>
-    </div>
-</section>
-
-<section class="section muted">
-    <div class="text-panel">
-        <p class="eyebrow">Academic Evidence</p>
-        <h2>Prediction System evidence</h2>
-        <p>
-            This page proves that the project moved beyond static model reporting. It includes user input, backend
-            prediction logic, model artifact loading, preprocessing consistency, result display, probability display,
-            confidence score, visualization, error handling, and a user-friendly interface in English.
-        </p>
     </div>
 </section>
 

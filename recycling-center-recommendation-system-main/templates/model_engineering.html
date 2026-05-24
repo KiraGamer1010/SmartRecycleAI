@@ -5,10 +5,10 @@
     <p class="eyebrow">R3A2 Model Engineering</p>
     <h1>Supervised Model Engineering</h1>
     <p>
-        This Render-safe page organizes the supervised training phase exactly by the teacher's rubric. The
+        This Render-safe page organizes the supervised training phase with a clean technical structure. The
         Model Development section contains Logistic Regression, Decision Tree, and Random Forest with Dataset Split,
         Training Process, Hyperparameter Configuration, Validation Process, Prediction Generation, Code Explanation,
-        Training Screenshots, Graphical Visualizations, and Model Summaries.
+        Graphical Visualizations, and Model Summaries.
     </p>
 </section>
 
@@ -34,7 +34,7 @@
 {% set engineering_charts = supervised_modeling.charts.model_engineering %}
 
 <section class="section">
-    <nav class="rubric-anchor-bar" aria-label="Model Engineering academic submenu">
+    <nav class="rubric-anchor-bar" aria-label="Model Engineering section menu">
         <a href="#model-development"><i class="fa-solid fa-sitemap"></i>Model Development</a>
         <a href="#logistic-regression"><i class="fa-solid fa-chart-simple"></i>Logistic Regression</a>
         <a href="#decision-tree"><i class="fa-solid fa-diagram-project"></i>Decision Tree</a>
@@ -91,7 +91,7 @@
 
 <section class="section academic-layout">
     <aside class="rubric-sidebar" aria-label="Model Engineering section navigator">
-        <p class="eyebrow">Internal academic submenu</p>
+        <p class="eyebrow">Internal section menu</p>
         <a href="#model-development">Model Development</a>
         {% for model in supervised_modeling.models %}
         <a href="#{{ model.slug|replace('_', '-') }}">{{ model.display_name }}</a>
@@ -104,7 +104,7 @@
         <article id="model-development" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Academic rubric overview</p>
+                    <p class="eyebrow">Engineering overview</p>
                     <h2>Model Development</h2>
                 </div>
                 <span class="rubric-badge">R3A2</span>
@@ -145,36 +145,30 @@
         <article class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Screenshot-ready visual evidence</p>
+                    <p class="eyebrow">Model performance visuals</p>
                     <h2>Model Engineering Graphs</h2>
                 </div>
                 <span class="rubric-badge">Graphical Visualizations</span>
             </div>
             <div class="grid three">
+                {% if engineering_charts.training_results_comparison %}
                 <figure class="chart-frame">
-                    {% if engineering_charts.training_results_comparison %}
                     <img src="{{ url_for('static', filename=engineering_charts.training_results_comparison) }}" alt="Training results comparison chart">
-                    {% else %}
-                    <div class="chart-placeholder">Training comparison chart is not available.</div>
-                    {% endif %}
                     <figcaption>Training results comparison across Logistic Regression, Decision Tree, and Random Forest.</figcaption>
                 </figure>
+                {% endif %}
+                {% if engineering_charts.prediction_distribution %}
                 <figure class="chart-frame">
-                    {% if engineering_charts.prediction_distribution %}
                     <img src="{{ url_for('static', filename=engineering_charts.prediction_distribution) }}" alt="Prediction distribution chart">
-                    {% else %}
-                    <div class="chart-placeholder">Prediction distribution chart is not available.</div>
-                    {% endif %}
                     <figcaption>Prediction distribution on the test set compared with actual priority classes.</figcaption>
                 </figure>
+                {% endif %}
+                {% if engineering_charts.model_performance_summary %}
                 <figure class="chart-frame">
-                    {% if engineering_charts.model_performance_summary %}
                     <img src="{{ url_for('static', filename=engineering_charts.model_performance_summary) }}" alt="Model-specific performance summary chart">
-                    {% else %}
-                    <div class="chart-placeholder">Model performance summary chart is not available.</div>
-                    {% endif %}
-                    <figcaption>Model-specific performance summary for academic reporting and screenshots.</figcaption>
+                    <figcaption>Model-specific performance summary for the training workflow.</figcaption>
                 </figure>
+                {% endif %}
             </div>
         </article>
 
@@ -182,7 +176,7 @@
         <article id="{{ model.slug|replace('_', '-') }}" class="rubric-section model-rubric-card">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Model {{ loop.index }} academic section</p>
+                    <p class="eyebrow">Model {{ loop.index }} training section</p>
                     <h2>{{ model.display_name }}</h2>
                 </div>
                 <span class="rubric-badge">{{ model.artifact }}</span>
@@ -315,36 +309,21 @@
                     </p>
                 </section>
 
-                <section class="rubric-subsection">
-                    <h3>Training Screenshots</h3>
-                    <div class="chart-placeholder screenshot-placeholder">
-                        Screenshot evidence must be captured from the running Flask application.
-                    </div>
-                    <p>
-                        This placeholder is intentional. The repository does not invent fake screenshots; the final
-                        PDF should capture the live Model Engineering page, training charts, and comparison tables.
-                    </p>
-                </section>
-
                 <section class="rubric-subsection rubric-subsection-wide">
                     <h3>Graphical Visualizations</h3>
                     <div class="grid two">
+                        {% if model.chart_paths.confusion_matrix %}
                         <figure class="chart-frame small-chart">
-                            {% if model.chart_paths.confusion_matrix %}
                             <img src="{{ url_for('static', filename=model.chart_paths.confusion_matrix) }}" alt="{{ model.display_name }} confusion matrix">
-                            {% else %}
-                            <div class="chart-placeholder">Confusion matrix is not available.</div>
-                            {% endif %}
                             <figcaption>{{ model.display_name }} validation confusion matrix.</figcaption>
                         </figure>
+                        {% endif %}
+                        {% if model.chart_paths.roc_curve %}
                         <figure class="chart-frame small-chart">
-                            {% if model.chart_paths.roc_curve %}
                             <img src="{{ url_for('static', filename=model.chart_paths.roc_curve) }}" alt="{{ model.display_name }} ROC curve">
-                            {% else %}
-                            <div class="chart-placeholder">ROC curve is not available.</div>
-                            {% endif %}
-                            <figcaption>{{ model.display_name }} multiclass One-vs-Rest ROC evidence.</figcaption>
+                            <figcaption>{{ model.display_name }} multiclass One-vs-Rest ROC curve.</figcaption>
                         </figure>
+                        {% endif %}
                     </div>
                 </section>
 
@@ -377,7 +356,7 @@
                     <p>
                         Strength: combines many trees to improve stability and capture nonlinear relationships.
                         Limitation: less transparent than a single tree and requires careful interpretation through
-                        metrics, charts, and feature evidence.
+                        metrics, charts, and feature interpretation.
                     </p>
                     {% endif %}
                 </section>
@@ -388,7 +367,7 @@
         <article id="flask-integration" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Required implementation evidence</p>
+                    <p class="eyebrow">Runtime integration</p>
                     <h2>Flask Integration</h2>
                 </div>
                 <span class="rubric-badge">Render-safe page context</span>
@@ -488,15 +467,15 @@
                     </p>
                 </article>
                 <article class="text-panel">
-                    <h3>Generated evidence</h3>
+                    <h3>Generated artifacts</h3>
                     <p>
                         Model files are stored under <strong>models/</strong>, training summaries under
                         <strong>reports/model_engineering/</strong>, and charts under
                         <strong>static/generated/model_engineering/</strong>.
                     </p>
                     <p>
-                        This structure keeps the academic report, screenshots, and Flask pages connected to the
-                        same reproducible artifacts.
+                        This structure keeps the Flask pages and reusable reports connected to the same
+                        reproducible artifacts.
                     </p>
                 </article>
             </div>
@@ -504,17 +483,5 @@
     </div>
 </section>
 
-<section class="section muted">
-    <div class="text-panel">
-        <p class="eyebrow">Academic Evidence</p>
-        <h2>Model Engineering evidence</h2>
-        <p>
-            This page proves that SmartRecycleAI implements a complete supervised training phase: dataset split,
-            training process, hyperparameters, validation, predictions, code explanation, graphs, results, model
-            artifacts, strengths, and limitations are documented separately for Logistic Regression, Decision Tree,
-            and Random Forest.
-        </p>
-    </div>
-</section>
 {% endif %}
 {% endblock %}

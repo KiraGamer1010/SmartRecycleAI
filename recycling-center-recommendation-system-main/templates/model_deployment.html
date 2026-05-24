@@ -37,7 +37,7 @@
             <p>
                 Production use should define monitoring procedures, incident response, change management, feedback
                 collection, model approval criteria, and escalation paths when recommendations conflict with field
-                evidence or policy constraints.
+                field observations or policy constraints.
             </p>
         </article>
     </div>
@@ -67,7 +67,7 @@
         <article>
             <span>04</span>
             <h2>Decision Interface</h2>
-            <p>Expose recommendation evidence to academic, institutional, or municipal users.</p>
+            <p>Expose recommendation outputs to academic, institutional, or municipal users.</p>
         </article>
         <article>
             <span>05</span>
@@ -89,7 +89,7 @@
         <p>
             SmartRecycleAI remains compatible with Render.com because it uses a standard Flask WSGI entry point,
             dependency file, Procfile, and Render service definition. Deployment does not require a separate heavy
-            ML server; the trained model artifacts and generated static evidence are served by the same application.
+            ML server; the trained model artifacts and generated static visuals are served by the same application.
         </p>
     </div>
     <div class="table-wrap">
@@ -125,7 +125,7 @@
                 <tr>
                     <td>Static charts</td>
                     <td>static/generated/</td>
-                    <td>Provides visual evidence for academic pages and PDF screenshots.</td>
+                    <td>Provides visual outputs for analytical pages and report captures.</td>
                 </tr>
             </tbody>
         </table>
@@ -138,7 +138,7 @@
             <h2>Deployment Validation</h2>
             <p>
                 A deployment is valid when the home page, CRISP-ML pages, Model Engineering, Model Evaluation,
-                Prediction System, K-Means evidence, and supporting documentation return HTTP 200 and the prediction
+                Prediction System, K-Means pages, and supporting documentation return HTTP 200 and the prediction
                 form can produce a result.
             </p>
         </article>
@@ -153,15 +153,4 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="text-panel">
-        <p class="eyebrow">Academic Evidence</p>
-        <h2>Model Deployment evidence</h2>
-        <p>
-            This page explains Render deployment, production workflow, deployment architecture, build/start concepts,
-            model artifacts, validation checks, and maintenance considerations. It shows that SmartRecycleAI was
-            prepared for public execution without changing the Machine Learning logic.
-        </p>
-    </div>
-</section>
 {% endblock %}

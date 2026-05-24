@@ -646,7 +646,7 @@ def build_dataset_catalog(data: dict[str, pd.DataFrame]) -> list[dict[str, Any]]
             "file": "Recycling facility registry CSV",
             "display_name": "Recycling facility registry",
             "source": "Recycling collection and classification facility registry.",
-            "role": "Operational infrastructure evidence for recycling center availability and capacity.",
+            "role": "Operational infrastructure signal for recycling center availability and capacity.",
             "contribution": "Adds facility counts, active facility counts, capacity, authorization, and compatibility indicators.",
             "quality_notes": "Capacity fields contain locale-specific number formats and text markers for unavailable values.",
             "profile": profile_dataframe("Recycling facility records", data["eca_records"]),

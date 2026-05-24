@@ -33,7 +33,7 @@
 {% set evaluation_charts = supervised_modeling.charts.model_evaluation %}
 
 <section class="section">
-    <nav class="rubric-anchor-bar" aria-label="Model Evaluation academic submenu">
+    <nav class="rubric-anchor-bar" aria-label="Model Evaluation section menu">
         <a href="#evaluation-dashboard"><i class="fa-solid fa-gauge-high"></i>Evaluation Dashboard</a>
         <a href="#accuracy"><i class="fa-solid fa-bullseye"></i>Accuracy</a>
         <a href="#precision"><i class="fa-solid fa-crosshairs"></i>Precision</a>
@@ -205,7 +205,7 @@
                 <span class="rubric-badge">Selection metric</span>
             </div>
             <p>
-                F1-Score balances precision and recall. SmartRecycleAI uses weighted F1-score as the main academic
+                F1-Score balances precision and recall. SmartRecycleAI uses weighted F1-score as the main
                 selection metric because it reflects balanced classification quality.
             </p>
             <div class="metric-dashboard">
@@ -229,14 +229,12 @@
             </div>
             <p>{{ supervised_modeling.roc_strategy }}</p>
             <div class="grid two">
+                {% if evaluation_charts.roc_curve_comparison %}
                 <figure class="chart-frame">
-                    {% if evaluation_charts.roc_curve_comparison %}
                     <img src="{{ url_for('static', filename=evaluation_charts.roc_curve_comparison) }}" alt="ROC curve comparison chart">
-                    {% else %}
-                    <div class="chart-placeholder">ROC comparison chart is not available.</div>
-                    {% endif %}
                     <figcaption>ROC Curve comparison: micro-averaged One-vs-Rest separation performance for all models.</figcaption>
                 </figure>
+                {% endif %}
                 <div class="table-wrap">
                     <table>
                         <thead>
@@ -260,14 +258,12 @@
             </div>
             <div class="grid three chart-gallery">
                 {% for model in supervised_modeling.models %}
+                {% if model.chart_paths.roc_curve %}
                 <figure class="chart-frame small-chart">
-                    {% if model.chart_paths.roc_curve %}
                     <img src="{{ url_for('static', filename=model.chart_paths.roc_curve) }}" alt="{{ model.display_name }} ROC curve">
-                    {% else %}
-                    <div class="chart-placeholder">{{ model.display_name }} ROC curve is not available.</div>
-                    {% endif %}
                     <figcaption>{{ model.display_name }} ROC Curve: class-by-class One-vs-Rest probability behavior.</figcaption>
                 </figure>
+                {% endif %}
                 {% endfor %}
             </div>
         </article>
@@ -286,14 +282,12 @@
             </p>
             <div class="grid three">
                 {% for model in supervised_modeling.models %}
+                {% if model.chart_paths.confusion_matrix %}
                 <figure class="chart-frame">
-                    {% if model.chart_paths.confusion_matrix %}
                     <img src="{{ url_for('static', filename=model.chart_paths.confusion_matrix) }}" alt="{{ model.display_name }} confusion matrix">
-                    {% else %}
-                    <div class="chart-placeholder">{{ model.display_name }} confusion matrix is not available.</div>
-                    {% endif %}
                     <figcaption>{{ model.display_name }} Confusion Matrix: validation errors by class.</figcaption>
                 </figure>
+                {% endif %}
                 {% endfor %}
             </div>
         </article>
@@ -301,7 +295,7 @@
         <article id="regression-metrics" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Academic completeness</p>
+                    <p class="eyebrow">Technical note</p>
                     <h2>Regression Metrics: MAE, MSE, RMSE, and R²</h2>
                 </div>
                 <span class="rubric-badge">Not primary for this task</span>
@@ -309,7 +303,7 @@
             <p>
                 SmartRecycleAI's current supervised task is <strong>classification</strong>, because the model
                 predicts a municipal priority class. Therefore, classification metrics are the primary evaluation
-                metrics. Regression metrics are included here for academic completeness.
+                metrics. Regression metrics are included here only as a technical reference.
             </p>
             <div class="rubric-mini-grid">
                 <article>
@@ -341,7 +335,7 @@
             </div>
             <p>
                 The comparative metrics table is generated from the stored evaluation report and summarizes all
-                test-set metrics used for academic model selection.
+                test-set metrics used for model selection.
             </p>
             <div class="table-wrap">
                 <table>
@@ -386,7 +380,7 @@
                 </section>
                 <section class="rubric-subsection">
                     <h3>Graphical comparisons</h3>
-                    <p>Generated charts summarize model performance visually for screenshots and final PDF evidence.</p>
+                    <p>Generated charts summarize model performance visually for comparison and reporting.</p>
                 </section>
                 <section class="rubric-subsection">
                     <h3>Performance analysis</h3>
@@ -405,36 +399,32 @@
                     <p class="eyebrow">Required comparison 2</p>
                     <h2>Comparison Charts</h2>
                 </div>
-                <span class="rubric-badge">Dashboard evidence</span>
+                <span class="rubric-badge">Evaluation dashboard</span>
             </div>
             <p>
-                Comparison charts provide screenshot-ready visual evidence that the three algorithms were evaluated
+                Comparison charts show that the three algorithms were evaluated
                 using the same test partition and the same scoring definitions.
             </p>
             <div class="grid two">
+                {% if evaluation_charts.metrics_comparison %}
                 <figure class="chart-frame">
-                    {% if evaluation_charts.metrics_comparison %}
                     <img src="{{ url_for('static', filename=evaluation_charts.metrics_comparison) }}" alt="Model metrics comparison chart">
-                    {% else %}
-                    <div class="chart-placeholder">Metrics comparison chart is not available.</div>
-                    {% endif %}
                     <figcaption>Comparison Charts: accuracy, precision, recall, and F1-score for all models.</figcaption>
                 </figure>
+                {% endif %}
+                {% if evaluation_charts.best_model_comparison %}
                 <figure class="chart-frame">
-                    {% if evaluation_charts.best_model_comparison %}
                     <img src="{{ url_for('static', filename=evaluation_charts.best_model_comparison) }}" alt="Best model comparison chart">
-                    {% else %}
-                    <div class="chart-placeholder">Best model chart is not available.</div>
-                    {% endif %}
                     <figcaption>Best model chart: focused performance summary for the selected classifier.</figcaption>
                 </figure>
+                {% endif %}
             </div>
         </article>
 
         <article id="flask-integration" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Required implementation evidence</p>
+                    <p class="eyebrow">Runtime integration</p>
                     <h2>Flask Integration</h2>
                 </div>
                 <span class="rubric-badge">Evaluation route</span>
@@ -466,10 +456,10 @@
         <article id="performance-analysis" class="rubric-section">
             <div class="rubric-section-header">
                 <div>
-                    <p class="eyebrow">Academic interpretation</p>
+                    <p class="eyebrow">Evaluation interpretation</p>
                     <h2>Performance Analysis</h2>
                 </div>
-                <span class="rubric-badge">Teacher-ready explanation</span>
+                <span class="rubric-badge">Technical explanation</span>
             </div>
             <div class="grid two">
                 <article class="text-panel">
@@ -544,7 +534,7 @@
                 <span class="rubric-badge">Risk awareness</span>
             </div>
             <p>
-                The evaluation results are strong academic evidence, but they remain dependent on the current
+                The evaluation results are strong, but they remain dependent on the current
                 dataset, target construction, feature quality, and public data update cycle. The model should be
                 reviewed with field experts before real investment decisions, especially because false low-priority
                 predictions could delay infrastructure action.
@@ -557,16 +547,5 @@
     </div>
 </section>
 
-<section class="section muted">
-    <div class="text-panel">
-        <p class="eyebrow">Academic Evidence</p>
-        <h2>Model Evaluation evidence</h2>
-        <p>
-            This page documents the evaluation objective, metric-by-metric interpretation, comparative tables,
-            comparative charts, ROC curves, confusion matrices, performance analysis, Random Forest selection, and
-            limitations. It demonstrates that the selected Prediction System model is supported by test-set evidence.
-        </p>
-    </div>
-</section>
 {% endif %}
 {% endblock %}

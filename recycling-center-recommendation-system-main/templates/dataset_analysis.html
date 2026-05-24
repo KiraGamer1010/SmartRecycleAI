@@ -2,7 +2,7 @@
 
 {% block content %}
 <section class="page-hero">
-    <p class="eyebrow">Analytical evidence</p>
+    <p class="eyebrow">Analytical overview</p>
     <h1>Dataset Analysis</h1>
     <p>
         The integrated SmartRecycleAI dataset combines recommendation targets, municipal indicators,
@@ -87,7 +87,7 @@
         <h2>What the processed dataset represents</h2>
         <p>
             The modeling dataset is the final analytical table produced by the data pipeline. Each row represents a
-            municipality profile, and each column contributes either descriptive context, engineered ML evidence, or
+            municipality profile, and each column contributes either descriptive context, engineered ML features, or
             the target label used by supervised classifiers.
         </p>
     </div>
@@ -97,7 +97,7 @@
             <p>The priority chart shows how target classes are distributed and helps detect imbalance before model evaluation.</p>
         </article>
         <article class="info-card">
-            <h3><i class="fa-solid fa-flask"></i> Statistical Evidence</h3>
+            <h3><i class="fa-solid fa-flask"></i> Statistical Profile</h3>
             <p>Summary charts and tables explain the scale, spread, and relationships of variables used by the models.</p>
         </article>
         <article class="info-card">
@@ -116,7 +116,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Evidence</th>
+                    <th>Analysis view</th>
                     <th>What it shows</th>
                     <th>Why it matters</th>
                 </tr>
@@ -147,14 +147,4 @@
     </div>
 </section>
 
-<section class="section muted">
-    <div class="text-panel">
-        <p class="eyebrow">Academic Evidence</p>
-        <h2>Dataset Analysis evidence</h2>
-        <p>
-            This page documents the processed dataset, class distribution, chart interpretation, statistical
-            evidence, data relationships, and the connection between data analysis and the Machine Learning models.
-        </p>
-    </div>
-</section>
 {% endblock %}
